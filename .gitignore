@@ -4,3 +4,5 @@
 *.exe
 *.out
 *.app
+*.tlog
+*.1.tlog

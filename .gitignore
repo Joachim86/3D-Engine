@@ -1,8 +1,14 @@
-/.vs
+\.vs
+\3D_Engine\x64\Debug\3D_Engine.tlog
+\3D_Engine\x64\Release\3D_Engine.tlog
 
-# Executables
+
 *.exe
 *.out
 *.app
 *.tlog
 *.1.tlog
+*.pdb
+*.ipdb
+*.ilk
+*.iobj

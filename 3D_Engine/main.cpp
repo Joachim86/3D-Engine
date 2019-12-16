@@ -140,22 +140,23 @@ public:
 		}
 			
 
-
+		// They have to be called because the return the delta since last call
 		int mouseX = GetMouseDeltaX();
 		int mouseY = GetMouseDeltaY();
+		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
+
+
 
 		if (GetKey(olc::ENTER).bHeld) //Delete Object (test)
 		{
 			//Object::deleteObject(5);
 
-			if(mouseX > 5 || mouseX < -5)
-				std::cout << "Mouse X: " << mouseX << "\n";
 
 			//SetMouseVisibility(false);
 			
 			//std::cout << "Yaw: " << Camera1->fYaw << "\n";
 
-			Camera1->rotateWithMouse(mouseX, fElapsedTime);
+			
 		}
 
 

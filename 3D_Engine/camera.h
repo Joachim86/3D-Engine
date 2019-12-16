@@ -107,9 +107,10 @@ public:
 		fYaw += offset * fElapsedTime;
 	}
 
-	void rotateWithMouse(float offset, float fElapsedTime)
+	void rotateWithMouse(float offsetX, float offsetY, float fElapsedTime)
 	{
-		fYaw += offset * fElapsedTime;
+		fYaw += offsetX * fElapsedTime;
+		fPitch += offsetY * fElapsedTime;
 	}
 
 	void rotateUp(float offset, float fElapsedTime)

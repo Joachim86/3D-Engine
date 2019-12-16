@@ -950,11 +950,12 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 		int32_t		nViewH = 0;
 		bool		bFullScreen = false;
 		
-		bool		bMouseVisible = true;		// (Added) Is used to turn the mouse visible or to hide it
-		bool		bMouseSnapBack = false;		// (Added) Is used to either snap the mouse back to the middle or not
-		bool		bMouseSnappedBack = false;	// (Added) Signals that the mouse snapped back
-		int32_t		nMousePosXold = 0;			// (Added) Stores the previous x-poisition to calculate the delta value
-		int32_t		nMousePosYold = 0;			// (Added) Stores the previous y-poisition to calculate the delta value
+		bool		bMouseVisible = true;				// (Added) Is used to turn the mouse visible or to hide it
+		bool		bMouseSnapBack = false;				// (Added) Is used to either snap the mouse back to the middle or not
+		bool		bMouseSnappedBack = false;			// (Added) Signals that the mouse snapped back
+		int32_t		nMouseDeltaX = 0;					// (Added) Stores the previous x-poisition to calculate the delta value
+		int32_t		nMouseDeltaY = 0;					// (Added) Stores the previous y-poisition to calculate the delta value
+		std::vector<char> m_RawInputMessageData;		// (Added) Stores information for raw input
 		
 		float		fPixelX = 1.0f;
 		float		fPixelY = 1.0f;
@@ -998,6 +999,7 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 		void olc_UpdateViewport();
 		bool olc_OpenGLCreate();
 		void olc_ConstructFontSheet();
+		void olc_UpdateRawInput(bool inForeground, HRAWINPUT hRawInput); // Added
 
 
 #ifdef _WIN32
@@ -1636,28 +1638,18 @@ namespace olc
 		return true;
 	}
 
-	int32_t PixelGameEngine::GetMouseDeltaX() // Added
+	int32_t PixelGameEngine::GetMouseDeltaX() // Added | Returns mouse delta since last call
 	{
-		if (!bMouseSnappedBack)
-		{
-			int32_t mouseDeltaX = GetMouseX() - nMousePosXold;
-			nMousePosXold = GetMouseX();
-			return mouseDeltaX;
-		}
-		bMouseSnappedBack = false;
-		return 0;
+		int temp = nMouseDeltaX;
+		nMouseDeltaX = 0;
+		return temp;
 	}
 
-	int32_t PixelGameEngine::GetMouseDeltaY() // Added
+	int32_t PixelGameEngine::GetMouseDeltaY() // Added | Returns mouse delta since last call
 	{
-		if (!bMouseSnappedBack)
-		{
-			int32_t mouseDeltaY = GetMouseY() - nMousePosYold;
-			nMousePosYold = GetMouseY();
-			return mouseDeltaY;
-		}
-		bMouseSnappedBack = false;
-		return 0;
+		int temp = nMouseDeltaY;
+		nMouseDeltaY = 0;
+		return temp;
 	}
 
 	int32_t PixelGameEngine::ScreenWidth()
@@ -2429,8 +2421,8 @@ namespace olc
 
 						bMouseSnappedBack = true;
 
-						nMousePosXold = nScreenWidth / 2 + rect.left;
-						nMousePosYold = nScreenHeight / 2 + rect.top;
+						//nMousePosXold = nScreenWidth / 2 + rect.left;
+						//nMousePosYold = nScreenHeight / 2 + rect.top;
 					}
 				}
 #endif
@@ -2537,6 +2529,43 @@ namespace olc
 		}
 	}
 
+	void PixelGameEngine::olc_UpdateRawInput(bool inForeground, HRAWINPUT hRawInput)
+	{
+		UINT dataSize;
+		GetRawInputData(
+			hRawInput, RID_INPUT, NULL, &dataSize, sizeof(RAWINPUTHEADER));
+
+		if (dataSize == 0)
+			return;
+		if (dataSize > m_RawInputMessageData.size())
+			m_RawInputMessageData.resize(dataSize);
+
+		void* dataBuf = &m_RawInputMessageData[0];
+		GetRawInputData(
+			hRawInput, RID_INPUT, dataBuf, &dataSize, sizeof(RAWINPUTHEADER));
+
+		const RAWINPUT* raw = (const RAWINPUT*)dataBuf;
+		if (raw->header.dwType == RIM_TYPEMOUSE)
+		{
+			HANDLE deviceHandle = raw->header.hDevice;
+
+			const RAWMOUSE& mouseData = raw->data.mouse;
+
+			USHORT flags = mouseData.usButtonFlags;
+			short wheelDelta = (short)mouseData.usButtonData;
+			LONG x = mouseData.lLastX, y = mouseData.lLastY;
+
+			nMouseDeltaX += x;
+			nMouseDeltaY += y;
+			
+			/*
+			wprintf(
+				L"Mouse: Device=0x%08X, Flags=%04x, WheelDelta=%d, X=%d, Y=%d\n",
+				deviceHandle, flags, wheelDelta, x, y);
+			*/
+		}
+	}
+
 #ifdef _WIN32
 	HWND PixelGameEngine::olc_WindowCreate()
 	{
@@ -2599,6 +2628,22 @@ namespace olc
 		olc_hWnd = CreateWindowEx(dwExStyle, "OLC_PIXEL_GAME_ENGINE", "", dwStyle,
 			nCosmeticOffset, nCosmeticOffset, width, height, NULL, NULL, GetModuleHandle(nullptr), this);
 #endif
+
+		// (Added) Change into raw inplut mode																								++++++++++++++++++++++++++++++++++++++RAW_INPUT+++++++++++++++++++++++++++++++++++++++
+		RAWINPUTDEVICE device;
+
+		device.usUsagePage = 0x01; //Mouse
+		device.usUsage = 0x02;
+		device.dwFlags = 0;
+		device.hwndTarget = NULL;
+
+		if (RegisterRawInputDevices(&device, 1, sizeof(device)) == FALSE)
+		{
+			std::cout << "Failed to register raw input devices.\n";
+		}
+		// (End) raw input mode
+
+
 
 		// Create Keyboard Mapping
 		mapKeys[0x00] = Key::NONE;
@@ -2663,6 +2708,9 @@ namespace olc
 	LRESULT CALLBACK PixelGameEngine::olc_WindowEvent(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		static PixelGameEngine* sge;
+
+
+
 		switch (uMsg)
 		{
 		case WM_CREATE:		sge = (PixelGameEngine*)((LPCREATESTRUCT)lParam)->lpCreateParams;	return 0;
@@ -2698,7 +2746,13 @@ namespace olc
 		case WM_MBUTTONUP:	sge->pMouseNewState[2] = false;							return 0;
 		case WM_CLOSE:		bAtomActive = false;									return 0;
 		case WM_DESTROY:	PostQuitMessage(0);										return 0;
+		case WM_INPUT:		sge->olc_UpdateRawInput(
+							GET_RAWINPUT_CODE_WPARAM(wParam) == RIM_INPUT,
+							(HRAWINPUT)lParam);										return 0;
 		}
+
+		
+
 		return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	}
 #else

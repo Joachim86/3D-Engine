@@ -1,10 +1,10 @@
 ﻿  main.cpp
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2424,22): warning C4018:  "<=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2424,58): warning C4018:  ">=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2424,109): warning C4018:  "<=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2424,146): warning C4018:  ">=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2691,46): warning C4244:  "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2692,45): warning C4244:  "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2416,22): warning C4018:  "<=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2416,58): warning C4018:  ">=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2416,109): warning C4018:  "<=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2416,146): warning C4018:  ">=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2739,46): warning C4244:  "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2740,45): warning C4244:  "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(95,30): warning C4244:  "=": Konvertierung von "double" in "float", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(105,1): warning C4244:  "-=": Konvertierung von "double" in "float", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(265,11): warning C4244:  "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
@@ -30,11 +30,11 @@ C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,69): warnin
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,59): warning C4244:  "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,49): warning C4244:  "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,39): warning C4244:  "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(158,29): warning C4244:  "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(146,36): warning C4244:  "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(146,28): warning C4244:  "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
   Code wird generiert.
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(644): warning C4715: "olc::Triangle_ClipAgainstPlane": Nicht alle Codepfade geben einen Wert zurück.
-  952 of 965 functions (98.7%) were compiled, the rest were copied from previous compilation.
-    41 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  4 of 999 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    16 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   3D_Engine.vcxproj -> C:\Users\Joachim\Documents\Github\3D-Engine\x64\Release\3D_Engine.exe

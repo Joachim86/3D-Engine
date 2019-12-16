@@ -6,8 +6,10 @@
 *.exe
 *.out
 *.app
+*.log
 *.tlog
 *.1.tlog
+*.1u.tlog
 *.pdb
 *.ipdb
 *.ilk

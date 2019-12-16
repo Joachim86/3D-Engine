@@ -155,8 +155,6 @@ public:
 			//SetMouseVisibility(false);
 			
 			//std::cout << "Yaw: " << Camera1->fYaw << "\n";
-
-			
 		}
 
 

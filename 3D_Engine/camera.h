@@ -109,8 +109,14 @@ public:
 
 	void rotateWithMouse(float offsetX, float offsetY, float fElapsedTime)
 	{
-		fYaw += offsetX * fElapsedTime;
-		fPitch += offsetY * fElapsedTime;
+		if (fYaw >= olc::PI * offsetX)
+			fYaw += olc::PI * offsetX;
+
+		if (fPitch > (-olc::PI / 2) + offsetY * fElapsedTime)
+			fPitch += offsetY * fElapsedTime;
+
+		//fYaw += offsetX * fElapsedTime;
+		//fPitch += offsetY * fElapsedTime;
 	}
 
 	void rotateUp(float offset, float fElapsedTime)

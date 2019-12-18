@@ -858,7 +858,7 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 
 		//Added
 		// Set Mouse Visible/not Visible
-		bool SetMouseVisibility(bool visible);			
+		bool SetCursorVisibility(bool visible);			
 		// Set Mouse Snap back to center
 		bool SetMouseCenter(bool center);
 		// Get Mouse Delta X
@@ -1533,7 +1533,7 @@ namespace olc
 		// Construct the window
 		if (!olc_WindowCreate())
 			return olc::FAIL;
-
+		
 		// Load libraries required for PNG file interaction
 //#ifdef _WIN32
 //		// Windows use GDI+
@@ -1622,12 +1622,11 @@ namespace olc
 		return nMouseWheelDelta;
 	}
 
-	bool PixelGameEngine::SetMouseVisibility(bool visible) // Added
+	bool PixelGameEngine::SetCursorVisibility(bool visible)
 	{
-		if (visible == bMouseVisible)
-			return false;
-		bMouseVisible = visible;
-		return true;
+		//Draw a Sprite at the location of the mouse and toggle it
+		
+		return false;
 	}
 
 	bool PixelGameEngine::SetMouseCenter(bool center) // Added
@@ -2209,7 +2208,7 @@ namespace olc
 	{
 		// Start OpenGL, the context is owned by the game thread
 		olc_OpenGLCreate();
-
+		
 		// Create Screen Texture - disable filtering
 		glEnable(GL_TEXTURE_2D);
 		glGenTextures(1, &glBuffer);
@@ -2532,8 +2531,7 @@ namespace olc
 	void PixelGameEngine::olc_UpdateRawInput(bool inForeground, HRAWINPUT hRawInput)
 	{
 		UINT dataSize;
-		GetRawInputData(
-			hRawInput, RID_INPUT, NULL, &dataSize, sizeof(RAWINPUTHEADER));
+		GetRawInputData(hRawInput, RID_INPUT, NULL, &dataSize, sizeof(RAWINPUTHEADER));
 
 		if (dataSize == 0)
 			return;
@@ -2541,8 +2539,7 @@ namespace olc
 			m_RawInputMessageData.resize(dataSize);
 
 		void* dataBuf = &m_RawInputMessageData[0];
-		GetRawInputData(
-			hRawInput, RID_INPUT, dataBuf, &dataSize, sizeof(RAWINPUTHEADER));
+		GetRawInputData(hRawInput, RID_INPUT, dataBuf, &dataSize, sizeof(RAWINPUTHEADER));
 
 		const RAWINPUT* raw = (const RAWINPUT*)dataBuf;
 		if (raw->header.dwType == RIM_TYPEMOUSE)
@@ -2643,6 +2640,8 @@ namespace olc
 		}
 		// (End) raw input mode
 
+
+		
 
 
 		// Create Keyboard Mapping

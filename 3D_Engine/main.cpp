@@ -32,8 +32,22 @@ private:
 
 
 
+	
+	void setcursor(bool visible, DWORD size) // set bool visible = 0 - invisible, bool visible = 1 - visible
+	{
+		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
+		if (size == 0)
+		{
+			size = 20;	// default cursor size Changing to numbers from 1 to 20, decreases cursor width
+		}
 
+		
 
+		CONSOLE_CURSOR_INFO lpCursor;
+		lpCursor.bVisible = visible;
+		lpCursor.dwSize = size;
+		SetConsoleCursorInfo(console, &lpCursor);
+	}
 
 
 
@@ -60,8 +74,13 @@ public:
 		//Create renderer
 		Renderer1 = new Renderer(this, Camera1);
 
+
+
 		//Set Mouse up
 		SetMouseCenter(true);
+		//setcursor(0, 30);
+
+
 
 		return true;
 	}
@@ -151,8 +170,9 @@ public:
 		{
 			//Object::deleteObject(5);
 
-
 			//SetMouseVisibility(false);
+
+			SetMouseCenter(true);
 			
 			//std::cout << "Yaw: " << Camera1->fYaw << "\n";
 		}
@@ -186,6 +206,7 @@ int main()
 {
 	Engine3D demo;
 
+	ShowCursor(NULL);
 
 	if (demo.Construct(960, 540, 1, 1, false))
 		demo.Start();

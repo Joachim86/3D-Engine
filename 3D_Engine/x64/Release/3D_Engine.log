@@ -33,7 +33,7 @@ C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,39): warnin
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(165,36): warning C4244:  "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(165,28): warning C4244:  "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
   Code wird generiert.
-  4 of 999 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+  2 of 999 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.

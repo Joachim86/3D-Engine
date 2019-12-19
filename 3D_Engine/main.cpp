@@ -206,7 +206,7 @@ int main()
 {
 	Engine3D demo;
 
-	ShowCursor(NULL);
+	//ShowCursor(NULL);
 
 	if (demo.Construct(960, 540, 1, 1, false))
 		demo.Start();

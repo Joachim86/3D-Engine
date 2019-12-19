@@ -2410,7 +2410,7 @@ namespace olc
 				
 				// (Added) Update Mouse Snap Back (Windows only)
 #ifdef _WIN32
-				if (bMouseSnapBack)
+				if (bMouseSnapBack && !bFullScreen)
 				{
 					if (GetMouseX() <= nScreenWidth / 10 || GetMouseX() >= nScreenWidth - nScreenWidth / 10 || GetMouseY() <= nScreenHeight / 10 || GetMouseY() >= nScreenHeight - nScreenHeight / 10)
 					{

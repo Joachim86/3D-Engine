@@ -7,15 +7,20 @@
 class Camera
 {
 public:
-	Camera(olc::PixelGameEngine* _olcEnginePointer)
+	Camera(olc::PixelGameEngine* _olcEnginePointer, float fieldOfView = 90.0f)
 	{
 		olcEnginePointer = _olcEnginePointer;
 
 		// Projection Matrix
-		matProj = olc::Matrix_MakeProjection(90.0f, (float)olcEnginePointer->ScreenHeight() / (float)olcEnginePointer->ScreenWidth(), 0.1f, 1000.0f);
+		matProj = olc::Matrix_MakeProjection(fieldOfView, (float)olcEnginePointer->ScreenHeight() / (float)olcEnginePointer->ScreenWidth(), 0.1f, 1000.0f);
 
 		fCameraRotation = 0;
 		setCameraPosition(olc::vec3d{ 0, 0, 0, 0 });
+	}
+
+	void setFieldOfView(float angle)
+	{
+		matProj = olc::Matrix_MakeProjection(angle, (float)olcEnginePointer->ScreenHeight() / (float)olcEnginePointer->ScreenWidth(), 0.1f, 1000.0f);
 	}
 
 	void update(float fElapsedTime) // update every frame; 

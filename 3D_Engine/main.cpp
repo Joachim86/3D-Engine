@@ -32,23 +32,6 @@ private:
 
 
 
-	
-	void setcursor(bool visible, DWORD size) // set bool visible = 0 - invisible, bool visible = 1 - visible
-	{
-		HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
-		if (size == 0)
-		{
-			size = 20;	// default cursor size Changing to numbers from 1 to 20, decreases cursor width
-		}
-
-		
-
-		CONSOLE_CURSOR_INFO lpCursor;
-		lpCursor.bVisible = visible;
-		lpCursor.dwSize = size;
-		SetConsoleCursorInfo(console, &lpCursor);
-	}
-
 
 
 
@@ -78,7 +61,6 @@ public:
 
 		//Set Mouse up
 		SetMouseCenter(true);
-		//setcursor(0, 30);
 
 
 

@@ -136,12 +136,12 @@ public:
 
 		if (GetKey(olc::ESCAPE).bHeld) //Exit Game
 		{
-			//nGameState = GS_COMPLETE;
+			nGameState = GS_COMPLETE;
 			SetMouseCenter(false);
 		}
 			
 
-		// They have to be called because the return the delta since last call
+		// They have to be called because they return the delta since last call
 		int mouseX = GetMouseDeltaX();
 		int mouseY = GetMouseDeltaY();
 		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);

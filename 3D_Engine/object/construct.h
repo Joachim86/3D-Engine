@@ -3,13 +3,39 @@
 #include "../engine.h"
 #include "object.h"
 
+struct Keyframe;
+struct Part;
+class Construct;
 
+
+
+struct Keyframe
+{
+private:
+	olc::vec3d					coordinateOffset;
+
+	float						timeStamp; // The time when the changes are applied. In milliseconds
+	float						partRotationX;
+	float						partRotationY;
+	float						partRotationZ;
+
+	Keyframe(float _timeStamp, float _partRotationX, float _partRotationY, float _partRotationZ)
+	{
+		timeStamp = _timeStamp;
+		partRotationX = _partRotationX;
+		partRotationY = _partRotationY;
+		partRotationZ = _partRotationZ;
+	}
+};
+
+
+// A construct consists of multiple parts and their purpose is to update istelf and every other part in the list
 struct Part
 {
 private:
-	// A construct consists of multiple parts and their purpose is to update istelf and every other child part
 	int32_t Id;
 
+	std::vector<Keyframe*>		keyframeVector;
 
 	static int32_t				IdCount = 0;
 
@@ -54,8 +80,8 @@ public:
 int32_t Part::IdCount;
 
 
-// A construct is just a class containing objects, that moves its content according to certain requirements
 
+// A construct is just a class containing objects, that moves its content according to certain requirements
 class Construct
 {
 	float						timeCount = 0;
@@ -69,5 +95,4 @@ public:
 	bool createConstruct();
 
 };
-
 std::vector<Construct*> Construct::constructVector;

@@ -34,5 +34,8 @@
     <ClInclude Include="renderer.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="object\construct.h">
+      <Filter>Engine\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

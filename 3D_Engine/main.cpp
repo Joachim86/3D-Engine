@@ -3,6 +3,7 @@
 
 #include "camera.h"
 #include "renderer.h"
+#include "object/construct.h"
 
 
 
@@ -19,7 +20,8 @@ private:
 	Camera* Camera1;
 	Renderer* Renderer1;
 
-
+	// Testing
+	obj::Construct* construct1;
 
 
 	enum
@@ -62,6 +64,10 @@ public:
 		//Set Mouse up
 		SetMouseCenter(true);
 
+
+
+		// Testing
+		construct1 = new obj::Construct(Object::objectVector[0], 5);
 
 
 		return true;
@@ -141,7 +147,7 @@ public:
 		}
 			
 
-		// They have to be called because they return the delta since last call
+		// They have to be called because they return the mouse-delta since last call
 		int mouseX = GetMouseDeltaX();
 		int mouseY = GetMouseDeltaY();
 		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
@@ -160,7 +166,8 @@ public:
 		}
 
 
-
+		// Testing
+		construct1->update();
 
 		
 		

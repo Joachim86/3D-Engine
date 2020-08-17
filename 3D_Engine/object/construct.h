@@ -178,7 +178,7 @@ namespace obj
 		if (elapsedTime > loopTime)
 			timePoint1 = std::chrono::system_clock::now();
 
-		//std::cout << elapsedTime << "\n";
+		std::cout << elapsedTime << "\n";
 	}
 
 	void Construct::toggleAnimation(bool _stopAnimation)

@@ -62,7 +62,7 @@ public:
 
 
 		//Set Mouse up
-		SetMouseCenter(true);
+		SetMouseCenter(false);
 
 
 
@@ -140,6 +140,12 @@ public:
 		if (GetKey(olc::DOWN).bHeld) // Rotate Down
 			Camera1->rotateDown(-2.0f, fElapsedTime);
 
+		if (GetKey(olc::Q).bHeld) // Tilt Left
+			Camera1->tiltLeft(2.0f, fElapsedTime);
+
+		if (GetKey(olc::E).bHeld) // Tilt Down
+			Camera1->tiltRight(-2.0f, fElapsedTime);
+
 		if (GetKey(olc::ESCAPE).bHeld) //Exit Game
 		{
 			nGameState = GS_COMPLETE;
@@ -150,7 +156,7 @@ public:
 		// They have to be called because they return the mouse-delta since last call
 		int mouseX = GetMouseDeltaX();
 		int mouseY = GetMouseDeltaY();
-		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
+		//Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
 
 
 
@@ -167,7 +173,7 @@ public:
 
 
 		// Testing
-		construct1->update();
+		//construct1->update();
 
 		
 		

@@ -30,30 +30,17 @@ public:
 		olc::vec3d vTarget = { 0,0,1 };
 
 
-		/*
-		olc::mat4x4 matCameraRotX = olc::Matrix_MakeRotationX(fPitch);
-		olc::mat4x4 matCameraRotY = olc::Matrix_MakeRotationY(fYaw);
-		olc::mat4x4 matCameraRotZ = olc::Matrix_MakeRotationZ(fRoll);
-
-		std::cout << fRoll << "\n";
-
-		olc::mat4x4 matCameraRot1 = olc::Matrix_MultiplyMatrix(matCameraRotX, matCameraRotY);
-		olc::mat4x4 matCameraRot2 = olc::Matrix_MultiplyMatrix(matCameraRotX, matCameraRotZ);
-		*/
-
-		olc::mat4x4 matCameraRotY = olc::Matrix_MakeRotationY(fYaw);
-		olc::mat4x4 matCameraRotX = olc::Matrix_MakeRotationX(fPitch);
-		olc::mat4x4 matCameraRotZ = olc::Matrix_MakeRotationZ(fRoll);
 		
-
-		std::cout << fRoll << "\n";
-
-		olc::mat4x4 matCameraRot1 = olc::Matrix_MultiplyMatrix(matCameraRotX, matCameraRotY);
-		olc::mat4x4 matCameraRot2 = olc::Matrix_MultiplyMatrix(matCameraRot1, matCameraRotZ);
+		olc::mat4x4 matCameraRotX = olc::Matrix_MakeRotationX(fPitch);
+		olc::mat4x4 matCameraRotY = olc::Matrix_MakeRotationY(fYaw);
+		olc::mat4x4 matCameraRotZ = olc::Matrix_MakeRotationZ(fRoll);
 
 
+		olc::mat4x4 matCameraRot = olc::Matrix_MultiplyMatrix(matCameraRotX, matCameraRotY);
 
-		vLookDir = Matrix_MultiplyVector(matCameraRot2, vTarget);
+
+
+		vLookDir = Matrix_MultiplyVector(matCameraRot, vTarget);
 
 		vTarget = olc::Vector_Add(vCamera, vLookDir);
 		olc::mat4x4 matCamera = Matrix_PointAt(vCamera, vTarget, vUp);

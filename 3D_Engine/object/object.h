@@ -51,9 +51,6 @@ public:
 	virtual void update();
 
 	static bool deleteObject(unsigned int position);
-
-	olc::vec3d vUpObject = { 0,1,0 };
-	olc::vec3d vTargetObject = { 0,0,1 };
 };
 
 int Object::numberOfObjects = 0;
@@ -189,6 +186,9 @@ void Object::rotateMeshZ(float _theta)
 
 void Object::updateRotation()
 {
+	olc::vec3d vUpObject = { 0,1,0 };
+	olc::vec3d vTargetObject = { 0,0,1 };
+
 	olc::mat4x4 objectRotationMatrix = Matrix_MultiplyMatrix(objectRotationMatrixX, objectRotationMatrixY);
 
 	objectLookingDirection = Matrix_MultiplyVector(objectRotationMatrix, vTargetObject);

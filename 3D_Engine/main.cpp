@@ -71,7 +71,7 @@ public:
 
 
 		// Testing
-		construct1 = new obj::Construct(Object::objectVector[0], 5);
+		//construct1 = new obj::Construct(Object::objectVector[0], 5);
 		//Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (136 + 184));
 		//Object::objectVector[2]->changeMeshCenter(0.5f, 0, 0.5f);
 

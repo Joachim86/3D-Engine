@@ -25,7 +25,9 @@ public:
 
 	olc::Sprite* objectSprite; // Not in use right now
 
-	olc::mat4x4 objectRotationMatrix;
+	olc::mat4x4 objectRotationMatrixX;
+	olc::mat4x4 objectRotationMatrixY;
+	olc::mat4x4 objectRotationMatrixZ;
 	olc::mat4x4 objectMatrix;
 
 public:
@@ -70,7 +72,9 @@ Object::Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint
 
 	ID = Object::numberOfObjects;
 
-	objectRotationMatrix = olc::Matrix_MakeIdentity();
+	objectRotationMatrixX = olc::Matrix_MakeIdentity();
+	objectRotationMatrixY = olc::Matrix_MakeIdentity();
+	objectRotationMatrixZ = olc::Matrix_MakeIdentity();
 
 	Object::numberOfObjects++;
 }
@@ -91,19 +95,19 @@ void Object::setCoordinates(void* _coordinates)
 void Object::setRotationX(float theta)
 {
 	objectRotationX = theta;
-	objectRotationMatrix = olc::Matrix_MakeRotationX(theta);
+	objectRotationMatrixX = olc::Matrix_MakeRotationX(theta);
 }
 
 void Object::setRotationY(float theta)
 {
 	objectRotationY = theta;
-	objectRotationMatrix = olc::Matrix_MakeRotationY(theta);
+	objectRotationMatrixY = olc::Matrix_MakeRotationY(theta);
 }
 
 void Object::setRotationZ(float theta)
 {
 	objectRotationZ = theta;
-	objectRotationMatrix = olc::Matrix_MakeRotationZ(theta);
+	objectRotationMatrixZ = olc::Matrix_MakeRotationZ(theta);
 }
 
 void Object::updateRotation()
@@ -111,6 +115,7 @@ void Object::updateRotation()
 	olc::vec3d vUpObject = { 0,1,0 };
 	olc::vec3d vTargetObject = { 0,0,1 };
 
+	olc::mat4x4 objectRotationMatrix = Matrix_MultiplyMatrix(objectRotationMatrixX, objectRotationMatrixY);
 
 	objectLookingDirection = Matrix_MultiplyVector(objectRotationMatrix, vTargetObject);
 	vTargetObject = Vector_Add(objectCoordinates, objectLookingDirection);

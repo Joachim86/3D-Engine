@@ -20,6 +20,8 @@ private:
 	Camera* Camera1;
 	Renderer* Renderer1;
 
+	float fieldOfView = 90;
+
 	// Testing
 	obj::Construct* construct1;
 
@@ -44,12 +46,14 @@ public:
 		Object::spriteContainer.push_back(new olc::Sprite);
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_1.png"));
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/street_1.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/gun.png"));
 
 
-
+		
 		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
-
+		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));
+		
 
 		//Create camera
 		Camera1 = new Camera(this);
@@ -110,47 +114,89 @@ public:
 
 	bool GameState_Main(float fElapsedTime)
 	{
-		if (GetKey(olc::SPACE).bHeld)
-			Camera1->moveCamera(olc::vec3d{ 0, 8.0f, 0, 1 }, fElapsedTime); // Upwards
+		if (GetKey(olc::SPACE).bHeld) // Upwards
+		{
+			Camera1->moveCamera(olc::vec3d{ 0, 8.0f, 0, 1 }, fElapsedTime);
+		}
+			
 
-		if (GetKey(olc::SHIFT).bHeld)
-			Camera1->moveCamera(olc::vec3d{ 0, -8.0f, 0, 1 }, fElapsedTime); // Downwards
+		if (GetKey(olc::SHIFT).bHeld) // Downwards
+		{
+			Camera1->moveCamera(olc::vec3d{ 0, -8.0f, 0, 1 }, fElapsedTime);
+		}
 
 		if (GetKey(olc::W).bHeld) // Forwards
+		{
 			Camera1->moveForward(8.0f, fElapsedTime, true);
+		}
 
 		if (GetKey(olc::S).bHeld) // Backwards
+		{
 			Camera1->moveForward(-8.0f, fElapsedTime, true);
+		}
 
 		if (GetKey(olc::A).bHeld) // Left
+		{
 			Camera1->moveSide(8.0f, fElapsedTime);
+		}
 
 		if (GetKey(olc::D).bHeld) // Right
+		{
 			Camera1->moveSide(-8.0f, fElapsedTime);
+		}
 
 		if (GetKey(olc::LEFT).bHeld) // Rotate Left
+		{
 			Camera1->rotateLeft(2.0f, fElapsedTime);
+		}
 
 		if (GetKey(olc::RIGHT).bHeld) // Rotate Right -2.0f is default
+		{
 			Camera1->rotateRight(-2.0f, fElapsedTime);
+		}
 
 		if (GetKey(olc::UP).bHeld) // Rotate Up
+		{
 			Camera1->rotateUp(2.0f, fElapsedTime);
+		}
 
 		if (GetKey(olc::DOWN).bHeld) // Rotate Down
+		{
 			Camera1->rotateDown(-2.0f, fElapsedTime);
+		}
 
-		if (GetKey(olc::Q).bHeld) // Tilt Left
-			Camera1->tiltLeft(2.0f, fElapsedTime);
+		if (GetKey(olc::Q).bHeld) // Increase FOV
+		{
+			fieldOfView += 20 * fElapsedTime; Camera1->setFieldOfView(fieldOfView);
+		}
 
-		if (GetKey(olc::E).bHeld) // Tilt Down
-			Camera1->tiltRight(-2.0f, fElapsedTime);
+		if (GetKey(olc::E).bHeld) // Decrease FOV
+		{
+			fieldOfView -= 20 * fElapsedTime; Camera1->setFieldOfView(fieldOfView);
+		}
 
 		if (GetKey(olc::ESCAPE).bHeld) //Exit Game
 		{
 			nGameState = GS_COMPLETE;
 			SetMouseCenter(false);
 		}
+
+		// Gun movement
+		//Object::objectVector[2]->objectCoordinates.x = Camera1->vCamera.x;
+		//Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
+		//Object::objectVector[2]->objectCoordinates.z = Camera1->vCamera.z + 1.0f;
+
+		
+		//Object::objectVector[2]->updateRotation();
+		Object::objectVector[2]->setRotationY(Camera1->fYaw);
+		Object::objectVector[2]->setRotationX(Camera1->fPitch);
+		Object::objectVector[2]->updateRotation();
+
+		//Object::objectVector[2]->objectMatrix = Camera1->matProj;
+		
+		
+
+		
 			
 
 		// They have to be called because they return the mouse-delta since last call

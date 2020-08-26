@@ -45,16 +45,32 @@ public:
 	{
 		Object::spriteContainer.push_back(new olc::Sprite);
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_1.png"));
-		Object::spriteContainer.push_back(new olc::Sprite("Ressources/street_1.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_2.png"));
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/gun.png"));
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Haus1.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Gras.png"));
 
 
 		
-		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 10, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 50, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
+
 		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2}));
+		Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (160));
+		Object::objectVector[2]->changeMeshCenter(-0.8f, -0.2f, 1.5f);
+
 		Object::objectVector.push_back(new Object("Haus 1", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ 10, 0, 15}));
+
+		Object::objectVector.push_back(new Object("Haus 2", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -10, 0, 15 }));
+		Object::objectVector[4]->rotateMeshY((3.1415926535 / 360) * (180));
+
+		Object::objectVector.push_back(new Object("Haus 3", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -30, 0, 15 }));
+
+		//Object::objectVector.push_back(new Object("Gras 1", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 0 }));
+
+
+
+		//Object::objectVector.push_back(new Object("Gras 2", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 30, 0, 0 }));
 		
 
 		//Create camera
@@ -71,11 +87,6 @@ public:
 		SetMouseCenter(false);
 
 
-
-		// Testing
-		//construct1 = new obj::Construct(Object::objectVector[0], 5);
-		Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (160));
-		Object::objectVector[2]->changeMeshCenter(-0.8f, -0.2f, 1.5f);
 
 
 		return true;
@@ -187,6 +198,7 @@ public:
 
 
 		// Gun movement
+		
 		Object::objectVector[2]->objectCoordinates.x = Camera1->vCamera.x;
 		Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
 		Object::objectVector[2]->objectCoordinates.z = Camera1->vCamera.z;
@@ -194,7 +206,7 @@ public:
 		Object::objectVector[2]->setRotationY(Camera1->fYaw);
 		Object::objectVector[2]->setRotationX(Camera1->fPitch);
 		Object::objectVector[2]->updateRotation();
-
+		
 		
 		
 

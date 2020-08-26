@@ -47,12 +47,14 @@ public:
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_1.png"));
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/street_1.png"));
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/gun.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Haus1.png"));
 
 
 		
 		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 10, 0, 0 }));
 		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 50, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));
+		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2}));
+		Object::objectVector.push_back(new Object("Haus 1", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ 10, 0, 15}));
 		
 
 		//Create camera
@@ -183,6 +185,7 @@ public:
 			SetMouseCenter(false);
 		}
 
+
 		// Gun movement
 		Object::objectVector[2]->objectCoordinates.x = Camera1->vCamera.x;
 		Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
@@ -195,13 +198,10 @@ public:
 		
 		
 
-		
-			
-
 		// They have to be called because they return the mouse-delta since last call
 		int mouseX = GetMouseDeltaX();
 		int mouseY = GetMouseDeltaY();
-		//Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
+		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
 
 
 

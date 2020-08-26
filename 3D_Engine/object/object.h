@@ -152,7 +152,6 @@ void Object::rotateMeshX(float _theta)
 			i.p[j] = Matrix_MultiplyVector(rotateMatTemp, i.p[j]);
 		}
 	}
-	std::cout << "i am called x\n";
 }
 
 void Object::rotateMeshY(float _theta)
@@ -166,7 +165,6 @@ void Object::rotateMeshY(float _theta)
 			i.p[j] = Matrix_MultiplyVector(rotateMatTemp, i.p[j]);
 		}
 	}
-	std::cout << "i am called y\n";
 }
 
 void Object::rotateMeshZ(float _theta)
@@ -180,7 +178,6 @@ void Object::rotateMeshZ(float _theta)
 			i.p[j] = Matrix_MultiplyVector(rotateMatTemp, i.p[j]);
 		}
 	}
-	std::cout << "i am called z\n";
 }
 
 

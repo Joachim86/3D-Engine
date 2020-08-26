@@ -30,10 +30,12 @@ C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,69): warnin
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,59): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(75,1): warning C4305: "Argument": Verkürzung von "double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(77,1): warning C4305: "Argument": Verkürzung von "double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(204,36): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(204,28): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
   Code wird generiert.
-  1 of 951 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  5 of 952 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   3D_Engine.vcxproj -> C:\Users\Joachim\Documents\Github\3D-Engine\x64\Release\3D_Engine.exe

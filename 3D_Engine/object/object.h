@@ -40,13 +40,20 @@ public:
 	void setRotationY(float theta);
 	void setRotationZ(float theta);
 
+	void changeMeshCenter(olc::vec3d _coordinates);
+	void changeMeshCenter(float _x, float _y, float _z);
+	void rotateMeshX(float _theta);
+	void rotateMeshY(float _theta);
+	void rotateMeshZ(float _theta);
+
 	void updateRotation();
 
 	virtual void update();
 
 	static bool deleteObject(unsigned int position);
 
-
+	olc::vec3d vUpObject = { 0,1,0 };
+	olc::vec3d vTargetObject = { 0,0,1 };
 };
 
 int Object::numberOfObjects = 0;
@@ -109,12 +116,79 @@ void Object::setRotationZ(float theta)
 	objectRotationZ = theta;
 	objectRotationMatrixZ = olc::Matrix_MakeRotationZ(theta);
 }
+/*
+void Object::changeMeshCenter(olc::vec3d _coordinates)
+{
+	
+	for (auto& i : objectMesh.tris)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			i.p[j].x += _coordinates.x;
+			i.p[j].y += _coordinates.y;
+			i.p[j].z += _coordinates.z;
+		}
+	}
+}
+
+void Object::changeMeshCenter(float _x, float _y, float _z)
+{
+	for (auto& i : objectMesh.tris)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			i.p[j].x += _x;
+			i.p[j].y += _y;
+			i.p[j].z += _z;
+		}
+	}
+}
+
+void Object::rotateMeshX(float _theta)
+{
+	olc::mat4x4 rotateMatTemp = olc::Matrix_MakeRotationX(_theta);
+
+	for (auto& i : objectMesh.tris)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			i.p[j] = Matrix_MultiplyVector(rotateMatTemp, i.p[j]);
+		}
+	}
+	std::cout << "i am called x\n";
+}
+
+void Object::rotateMeshY(float _theta)
+{
+	olc::mat4x4 rotateMatTemp = olc::Matrix_MakeRotationY(_theta);
+
+	for (auto& i : objectMesh.tris)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			i.p[j] = Matrix_MultiplyVector(rotateMatTemp, i.p[j]);
+		}
+	}
+	std::cout << "i am called y\n";
+}
+
+void Object::rotateMeshZ(float _theta)
+{
+	olc::mat4x4 rotateMatTemp = olc::Matrix_MakeRotationZ(_theta);
+
+	for (auto& i : objectMesh.tris)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			i.p[j] = Matrix_MultiplyVector(rotateMatTemp, i.p[j]);
+		}
+	}
+	std::cout << "i am called z\n";
+}
+*/
 
 void Object::updateRotation()
 {
-	olc::vec3d vUpObject = { 0,1,0 };
-	olc::vec3d vTargetObject = { 0,0,1 };
-
 	olc::mat4x4 objectRotationMatrix = Matrix_MultiplyMatrix(objectRotationMatrixX, objectRotationMatrixY);
 
 	objectLookingDirection = Matrix_MultiplyVector(objectRotationMatrix, vTargetObject);

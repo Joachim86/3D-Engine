@@ -50,8 +50,8 @@ public:
 
 
 		
-		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 10, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 50, 0, 0 }));
 		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));
 		
 
@@ -72,6 +72,8 @@ public:
 
 		// Testing
 		construct1 = new obj::Construct(Object::objectVector[0], 5);
+		//Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (136 + 184));
+		//Object::objectVector[2]->changeMeshCenter(0.5f, 0, 0.5f);
 
 
 		return true;
@@ -182,15 +184,15 @@ public:
 		}
 
 		// Gun movement
-		//Object::objectVector[2]->objectCoordinates.x = Camera1->vCamera.x;
-		//Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
-		//Object::objectVector[2]->objectCoordinates.z = Camera1->vCamera.z + 1.0f;
+		Object::objectVector[2]->objectCoordinates.x = Camera1->vCamera.x;
+		Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
+		Object::objectVector[2]->objectCoordinates.z = Camera1->vCamera.z;
 
 		
 		//Object::objectVector[2]->updateRotation();
-		Object::objectVector[2]->setRotationY(Camera1->fYaw);
-		Object::objectVector[2]->setRotationX(Camera1->fPitch);
-		Object::objectVector[2]->updateRotation();
+		//Object::objectVector[2]->setRotationY(Camera1->fYaw);
+		//Object::objectVector[2]->setRotationX(Camera1->fPitch);
+		//Object::objectVector[2]->updateRotation();
 
 		//Object::objectVector[2]->objectMatrix = Camera1->matProj;
 		

@@ -72,8 +72,8 @@ public:
 
 		// Testing
 		//construct1 = new obj::Construct(Object::objectVector[0], 5);
-		//Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (136 + 184));
-		//Object::objectVector[2]->changeMeshCenter(0.5f, 0, 0.5f);
+		Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (160));
+		Object::objectVector[2]->changeMeshCenter(-0.8f, -0.2f, 1.5f);
 
 
 		return true;
@@ -188,13 +188,10 @@ public:
 		Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
 		Object::objectVector[2]->objectCoordinates.z = Camera1->vCamera.z;
 
-		
-		//Object::objectVector[2]->updateRotation();
-		//Object::objectVector[2]->setRotationY(Camera1->fYaw);
-		//Object::objectVector[2]->setRotationX(Camera1->fPitch);
-		//Object::objectVector[2]->updateRotation();
+		Object::objectVector[2]->setRotationY(Camera1->fYaw);
+		Object::objectVector[2]->setRotationX(Camera1->fPitch);
+		Object::objectVector[2]->updateRotation();
 
-		//Object::objectVector[2]->objectMatrix = Camera1->matProj;
 		
 		
 

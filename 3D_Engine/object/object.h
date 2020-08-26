@@ -113,7 +113,7 @@ void Object::setRotationZ(float theta)
 	objectRotationZ = theta;
 	objectRotationMatrixZ = olc::Matrix_MakeRotationZ(theta);
 }
-/*
+
 void Object::changeMeshCenter(olc::vec3d _coordinates)
 {
 	
@@ -182,7 +182,7 @@ void Object::rotateMeshZ(float _theta)
 	}
 	std::cout << "i am called z\n";
 }
-*/
+
 
 void Object::updateRotation()
 {

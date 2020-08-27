@@ -28,23 +28,20 @@ class Construct
 
 
 
-	float						loopTime; // max time for whole animation-rotation. in seconds
-	float						elapsedTime;
+	float						fLoopTime; // max time for whole animation-rotation. in seconds
+	float						fElapsedTime;
+	bool						bStopAnimation = false;
+	bool						bStopInterpolate = true;
+	std::string					sFilename;
 
 	std::chrono::system_clock::time_point timePoint1;
 
-	bool						stopAnimation = false;
-	bool						stopInterpolate = true;
-
-	std::string					filename;
-
-
-	std::vector<Object*>		objectVector;
+	std::vector<Object*>		*objectVectorPointer;
 	std::vector<Keyframe>		keyframeVector;
 
 public:
 
-	Construct(std::string _filename);
+	Construct(std::string _filename, std::vector<Object*> *_objectVectorPointer);
 	~Construct();
 
 
@@ -61,6 +58,40 @@ public:
 	void performKeyframe(int _keyFrameNumber);
 
 };
+
+inline Construct::Construct(std::string _filename, std::vector<Object*>* _objectVectorPointer)
+{
+}
+
+inline Construct::~Construct()
+{
+}
+
+inline void Construct::update()
+{
+}
+
+inline void Construct::start()
+{
+}
+
+inline void Construct::stop()
+{
+}
+
+inline void Construct::startInterpolate()
+{
+}
+
+inline void Construct::stopInterpolate()
+{
+}
+
+inline void Construct::performKeyframe(int _keyFrameNumber)
+{
+}
+
+
 
 // Structure of Animation.ani file
 /*

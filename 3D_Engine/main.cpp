@@ -23,7 +23,7 @@ private:
 	float fieldOfView = 90;
 
 	// Testing
-	obj::Construct* construct1;
+	//obj::Construct* construct1;
 
 
 	enum
@@ -43,60 +43,6 @@ private:
 public:
 	bool OnUserCreate() override
 	{
-		Object::spriteContainer.push_back(new olc::Sprite);
-		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_1.png"));
-		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_2.png"));
-		Object::spriteContainer.push_back(new olc::Sprite("Ressources/gun.png"));
-		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Haus1.png"));
-		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Gras.png"));
-
-
-		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
-
-		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2}));
-		Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (160));
-		Object::objectVector[2]->changeMeshCenter(-0.8f, -0.2f, 1.5f);
-
-		Object::objectVector.push_back(new Object("Haus 1", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ 10, 0, 15}));
-
-		Object::objectVector.push_back(new Object("Haus 2", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -10, 0, 15 }));
-		Object::objectVector[4]->rotateMeshY((3.1415926535 / 360) * (180));
-
-		Object::objectVector.push_back(new Object("Haus 3", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -30, 0, 15 }));
-
-		Object::objectVector.push_back(new Object("Gras 1", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -32, 0, 0 }));
-		Object::objectVector.push_back(new Object("Gras 2", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -16, 0, 0 }));
-		Object::objectVector.push_back(new Object("Gras 3", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -32, 0, 16 }));
-		Object::objectVector.push_back(new Object("Gras 4", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -16, 0, 16 }));
-
-		Object::objectVector.push_back(new Object("Gras 5", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 0 }));
-		Object::objectVector.push_back(new Object("Gras 6", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 0 }));
-		Object::objectVector.push_back(new Object("Gras 7", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 16 }));
-		Object::objectVector.push_back(new Object("Gras 8", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
-
-		Object::objectVector.push_back(new Object("Gras 9", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 0 }));
-		Object::objectVector.push_back(new Object("Gras 10", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 0 }));
-		Object::objectVector.push_back(new Object("Gras 11", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
-		Object::objectVector.push_back(new Object("Gras 12", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 16 }));
-		
-
-		//Create camera
-		Camera1 = new Camera(this);
-		Camera1->setCameraPosition(olc::vec3d{ 0, 0, -5, 1 });
-
-
-		//Create renderer
-		Renderer1 = new Renderer(this, Camera1);
-
-
-
-		//Set Mouse up
-		SetMouseCenter(false);
-
-
-
-
 		return true;
 	}
 
@@ -121,6 +67,66 @@ public:
 
 	bool GameState_Loading(float fElapsedTime)
 	{
+		Object::spriteContainer.push_back(new olc::Sprite);
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_1.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/texture_2.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/gun.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Haus1.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Gras.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Fadenkreuz.png"));
+
+
+		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
+
+		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));
+		Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (160));
+		Object::objectVector[2]->changeMeshCenter(-0.8f, -0.2f, 1.5f);
+
+		Object::objectVector.push_back(new Object("Haus 1", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ 10, 0, 15 }));
+
+		Object::objectVector.push_back(new Object("Haus 2", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -10, 0, 15 }));
+		Object::objectVector[4]->rotateMeshY((3.1415926535 / 360) * (180));
+
+		Object::objectVector.push_back(new Object("Haus 3", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -30, 0, 15 }));
+
+		Object::objectVector.push_back(new Object("Gras 1", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -32, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 2", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -16, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 3", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -32, 0, 16 }));
+		Object::objectVector.push_back(new Object("Gras 4", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -16, 0, 16 }));
+
+		Object::objectVector.push_back(new Object("Gras 5", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 6", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 7", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 16 }));
+		Object::objectVector.push_back(new Object("Gras 8", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
+
+		Object::objectVector.push_back(new Object("Gras 9", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 10", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 11", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
+		Object::objectVector.push_back(new Object("Gras 12", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 16 }));
+
+
+		//Create camera
+		Camera1 = new Camera(this);
+		Camera1->setCameraPosition(olc::vec3d{ 0, 0, -5, 1 });
+
+
+		//Create renderer
+		Renderer1 = new Renderer(this, Camera1);
+
+
+
+		//Set Mouse up
+		SetMouseCenter(false);
+
+
+		//Set Pixel Mode, may be costly
+		SetPixelMode(olc::Pixel::ALPHA);
+
+
+
+
+
 		nGameState = GS_TITLE;
 		return true;
 	}
@@ -204,6 +210,11 @@ public:
 			SetMouseCenter(false);
 		}
 
+		if (GetKey(olc::ENTER).bHeld) //Set Mouse Center
+		{
+			SetMouseCenter(true);
+		}
+
 
 		// Gun movement
 		
@@ -225,18 +236,6 @@ public:
 
 
 
-		if (GetKey(olc::ENTER).bHeld) //Delete Object (test)
-		{
-			//Object::deleteObject(5);
-
-			//SetMouseVisibility(false);
-
-			SetMouseCenter(true);
-			
-			//std::cout << "Yaw: " << Camera1->fYaw << "\n";
-		}
-
-
 		// Testing
 		//construct1->update();
 
@@ -247,6 +246,13 @@ public:
 		Camera1->update(fElapsedTime);
 
 		Renderer1->update();
+
+
+
+		// Draw Center Crosshair (Always render last)
+		DrawSprite(ScreenWidth() / 2 - Object::spriteContainer[6]->width / 2, ScreenHeight() / 2 - Object::spriteContainer[6]->height / 2, Object::spriteContainer[6], 1);
+
+
 
 		return true;
 	}

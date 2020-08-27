@@ -108,7 +108,7 @@ public:
 		offset = fabs(offset);
 
 		if (fYaw <= 0)
-			fYaw = (olc::PI * offset) - fYaw;
+			fYaw = (olc::PI * 2) - fYaw;
 
 		fYaw -= offset * fElapsedTime;
 	}
@@ -117,18 +117,28 @@ public:
 	{
 		offset = fabs(offset);
 
-		if (fYaw >= olc::PI * offset)
-			fYaw -= olc::PI * offset;
+		if (fYaw >= olc::PI * 2)
+			fYaw -= olc::PI * 2;
 
 		fYaw += offset * fElapsedTime;
 	}
 
 	void rotateWithMouse(float offsetX, float offsetY, float fElapsedTime)
 	{
-		//std::cout << "Yaw: " << fYaw << "\n";
+		if (fYaw >= olc::PI * 2)
+			fYaw -= olc::PI * 2;
+
+		if (fYaw <= 0)
+			fYaw = (olc::PI * 2) - fYaw;
 
 		fYaw += offsetX * fElapsedTime;
-		fPitch += offsetY * fElapsedTime;
+
+
+		if (fPitch + (offsetY * fElapsedTime) < (olc::PI / 2) &&
+			fPitch + (offsetY * fElapsedTime) > (-olc::PI / 2))
+		{
+			fPitch += offsetY * fElapsedTime;
+		}
 	}
 
 	void rotateUp(float offset, float fElapsedTime)
@@ -143,7 +153,7 @@ public:
 	{
 		offset = fabs(offset);
 
-		if (fPitch <= (olc::PI / 2) - 2 * fElapsedTime)
+		if (fPitch <= (olc::PI / 2) - offset * fElapsedTime)
 			fPitch += offset * fElapsedTime;
 	}
 

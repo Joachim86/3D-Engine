@@ -51,7 +51,6 @@ public:
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Gras.png"));
 
 
-		
 		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
 		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
 
@@ -66,11 +65,20 @@ public:
 
 		Object::objectVector.push_back(new Object("Haus 3", "Ressources/Haus1.obj", Object::spriteContainer[4], (uint8_t)4, olc::vec3d{ -30, 0, 15 }));
 
-		//Object::objectVector.push_back(new Object("Gras 1", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 1", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -32, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 2", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -16, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 3", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -32, 0, 16 }));
+		Object::objectVector.push_back(new Object("Gras 4", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ -16, 0, 16 }));
 
+		Object::objectVector.push_back(new Object("Gras 5", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 6", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 7", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 0, 0, 16 }));
+		Object::objectVector.push_back(new Object("Gras 8", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
 
-
-		//Object::objectVector.push_back(new Object("Gras 2", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 30, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 9", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 10", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 0 }));
+		Object::objectVector.push_back(new Object("Gras 11", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
+		Object::objectVector.push_back(new Object("Gras 12", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 16 }));
 		
 
 		//Create camera
@@ -162,12 +170,12 @@ public:
 
 		if (GetKey(olc::LEFT).bHeld) // Rotate Left
 		{
-			Camera1->rotateLeft(2.0f, fElapsedTime);
+			Camera1->rotateLeft(3.0f, fElapsedTime);
 		}
 
 		if (GetKey(olc::RIGHT).bHeld) // Rotate Right -2.0f is default
 		{
-			Camera1->rotateRight(-2.0f, fElapsedTime);
+			Camera1->rotateRight(-3.0f, fElapsedTime);
 		}
 
 		if (GetKey(olc::UP).bHeld) // Rotate Up

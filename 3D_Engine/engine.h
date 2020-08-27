@@ -346,12 +346,12 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 								tokens[nTokenCount].append(1, c);
 						}
 
+
 						tokens[nTokenCount].pop_back();
 
 
 						tris.push_back({ verts[stoi(tokens[0]) - 1], verts[stoi(tokens[2]) - 1], verts[stoi(tokens[4]) - 1],
 							texs[stoi(tokens[1]) - 1], texs[stoi(tokens[3]) - 1], texs[stoi(tokens[5]) - 1] });
-
 					}
 
 				}

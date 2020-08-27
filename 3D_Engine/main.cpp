@@ -224,7 +224,6 @@ public:
 
 		Object::objectVector[2]->setRotationY(Camera1->fYaw);
 		Object::objectVector[2]->setRotationX(Camera1->fPitch);
-		Object::objectVector[2]->updateRotation();
 		
 		
 		

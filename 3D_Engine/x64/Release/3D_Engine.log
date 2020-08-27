@@ -9,33 +9,33 @@ C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(111,25): warning 
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(121,1): warning C4305: "-=": Verkürzung von "double" in "float"
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(129,1): warning C4305: "-=": Verkürzung von "double" in "float"
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(132,25): warning C4244: "=": Konvertierung von "double" in "float", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(265,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(266,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(325,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(326,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(418,40): warning C4267: "=": Konvertierung von "size_t" nach "int", Datenverlust möglich
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(429,22): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(429,12): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(428,22): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(428,12): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(427,38): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(427,28): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(435,89): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(435,79): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(435,69): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(435,59): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(435,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(435,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,89): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,79): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,69): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,59): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(442,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(267,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(268,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(327,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(328,11): warning C4244: "Initialisierung": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(420,40): warning C4267: "=": Konvertierung von "size_t" nach "int", Datenverlust möglich
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(431,22): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(431,12): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(430,22): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(430,12): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(429,38): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(429,28): warning C4244: "Argument": Konvertierung von "float" in "int", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(437,89): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(437,79): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(437,69): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(437,59): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(437,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(437,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(444,89): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(444,79): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(444,69): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(444,59): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(444,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(444,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(83,1): warning C4305: "Argument": Verkürzung von "double" in "float"
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(89,1): warning C4305: "Argument": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(235,36): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(235,28): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(234,36): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(234,28): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
   Code wird generiert.
   3 of 940 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation

@@ -10,43 +10,16 @@
 class Renderer
 {
 public:
-	Renderer(olc::PixelGameEngine* enginePointer_, Camera* cameraPointer_)
-	{
-		enginePointer = enginePointer_;
-		cameraPointer = cameraPointer_;
+	Renderer(olc::PixelGameEngine* enginePointer_, Camera* cameraPointer_);
 
-		pDepthBuffer = new float[enginePointer->ScreenWidth() * enginePointer->ScreenHeight()];
-	}
-
-	void update()
-	{
-		// Clear Depth Buffer
-		for (int i = 0; i < enginePointer->ScreenWidth() * enginePointer->ScreenHeight(); i++)
-		{
-			pDepthBuffer[i] = 0.0f;
-		}
-
-		// Clear triangle buffer
-		Object::vecTrianglesToRaster.clear();
-
-		for (auto& object_ : Object::objectVector)
-		{
-			object_->updateRotation();
-			object_->update();
-			NormalizeTriangle(object_->objectMesh, object_->objectMatrix);
-		}
-
-		renderTriangles();
-	}
-
-
+	void update();
 
 	bool NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject);
 
-	void TexturedTriangle(int x1, int y1, float u1, float v1, float w1,
-		int x2, int y2, float u2, float v2, float w2,
-		int x3, int y3, float u3, float v3, float w3,
-		olc::Sprite* tex);
+	void TexturedTriangle(	int x1, int y1, float u1, float v1, float w1,
+							int x2, int y2, float u2, float v2, float w2,
+							int x3, int y3, float u3, float v3, float w3,
+							olc::Sprite* tex);
 
 	void renderTriangles();
 
@@ -58,6 +31,35 @@ private:
 	float* pDepthBuffer = nullptr;
 };
 
+Renderer::Renderer(olc::PixelGameEngine* enginePointer_, Camera* cameraPointer_)
+{
+	enginePointer = enginePointer_;
+	cameraPointer = cameraPointer_;
+
+	pDepthBuffer = new float[enginePointer->ScreenWidth() * enginePointer->ScreenHeight()];
+}
+
+
+void Renderer::update()
+{
+	// Clear Depth Buffer
+	for (int i = 0; i < enginePointer->ScreenWidth() * enginePointer->ScreenHeight(); i++)
+	{
+		pDepthBuffer[i] = 0.0f;
+	}
+
+	// Clear triangle buffer
+	Object::vecTrianglesToRaster.clear();
+
+	for (auto& object_ : Object::objectVector)
+	{
+		object_->updateRotation();
+		object_->update();
+		NormalizeTriangle(object_->objectMesh, object_->objectMatrix);
+	}
+
+	renderTriangles();
+}
 
 
 bool Renderer::NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject)

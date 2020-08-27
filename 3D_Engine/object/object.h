@@ -34,7 +34,7 @@ public:
 	Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_);
 	~Object();
 
-	void setCoordinates(void* _coordinates);
+	void setCoordinates(olc::vec3d _coordinates);
 
 	void setRotationX(float theta);
 	void setRotationY(float theta);
@@ -91,9 +91,9 @@ Object::~Object()
 
 }
 
-void Object::setCoordinates(void* _coordinates)
+void Object::setCoordinates(olc::vec3d _coordinates)
 {
-	objectCoordinates = *(olc::vec3d*)_coordinates;
+	objectCoordinates = _coordinates;
 }
 
 void Object::setRotationX(float theta)

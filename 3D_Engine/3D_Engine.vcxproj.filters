@@ -12,6 +12,9 @@
     <Filter Include="Engine\Objects">
       <UniqueIdentifier>{b47835d9-e282-4b4a-b054-db4e6c0114e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{239ed357-a73d-41e4-817c-389caf9fd7db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="object\construct.h">
       <Filter>Engine\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="boundingBox.h">
+      <Filter>Engine\Physics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

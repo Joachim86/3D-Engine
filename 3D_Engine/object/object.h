@@ -31,7 +31,7 @@ public:
 	olc::mat4x4 objectMatrix;
 
 public:
-	Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_);
+	Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour);
 	~Object();
 
 	void setCoordinates(olc::vec3d _coordinates);
@@ -60,14 +60,22 @@ std::vector<olc::Sprite*> Object::spriteContainer;
 
 
 
-Object::Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_)
+Object::Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour = olc::YELLOW)
 {
 	objectName = Name;
-	//objectMesh.LoadFromObjectFile(meshFile, !sprite ? true : false);
-	objectMesh.LoadFromObjectFile(meshFile, true);
+	
+
+	if (_texturecode)
+	{
+		objectMesh.LoadFromObjectFile(meshFile, true);
+	}
+	else
+	{
+		objectMesh.LoadFromObjectFile(meshFile, false, _colour);
+	}
 	objectMesh.textureCodeMesh = _texturecode;
 
-	//objectCoordinates = *(olc::vec3d*)_coordinates_;
+
 	objectCoordinates = _coordinates_;
 
 	if (!sprite)

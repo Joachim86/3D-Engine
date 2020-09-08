@@ -78,7 +78,9 @@ public:
 
 		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
 		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 3", "Ressources/cube_2.obj", Object::spriteContainer[0], (uint8_t)0, olc::vec3d{ 10, 0, 0 }, olc::BLUE));
 
+		/*
 		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));
 		Object::objectVector[2]->rotateMeshY((3.1415926535 / 360) * (160));
 		Object::objectVector[2]->changeMeshCenter(-0.8f, -0.2f, 1.5f);
@@ -104,7 +106,7 @@ public:
 		Object::objectVector.push_back(new Object("Gras 10", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 0 }));
 		Object::objectVector.push_back(new Object("Gras 11", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 16, 0, 16 }));
 		Object::objectVector.push_back(new Object("Gras 12", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 16 }));
-
+		*/
 
 		//Create camera
 		Camera1 = new Camera(this);
@@ -217,14 +219,14 @@ public:
 
 
 		// Gun movement
-		
+		/*
 		Object::objectVector[2]->objectCoordinates.x = Camera1->vCamera.x;
 		Object::objectVector[2]->objectCoordinates.y = Camera1->vCamera.y;
 		Object::objectVector[2]->objectCoordinates.z = Camera1->vCamera.z;
 
 		Object::objectVector[2]->setRotationY(Camera1->fYaw);
 		Object::objectVector[2]->setRotationX(Camera1->fPitch);
-		
+		*/
 		
 		
 

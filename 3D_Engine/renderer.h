@@ -5,7 +5,7 @@
 #include "object/object.h"
 #include "object/staticObject.h"
 
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 class Renderer
 {
@@ -20,6 +20,11 @@ public:
 							int x2, int y2, float u2, float v2, float w2,
 							int x3, int y3, float u3, float v3, float w3,
 							olc::Sprite* tex);
+
+	void colouredTriangle(	int x1, int y1, float w1,
+							int x2, int y2, float w2,
+							int x3, int y3, float w3,
+							olc::Pixel _colour);
 
 	void renderTriangles();
 
@@ -64,8 +69,6 @@ void Renderer::update()
 
 bool Renderer::NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject)
 {
-	
-	
 	// Normalize Triangles
 	for (auto tri : meshObject.tris)
 	{
@@ -142,6 +145,7 @@ bool Renderer::NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject)
 				triProjected.t[2] = clipped[n].t[2];
 
 
+				// Correct UV-Coordinates
 				triProjected.t[0].u = triProjected.t[0].u / triProjected.p[0].w;
 				triProjected.t[1].u = triProjected.t[1].u / triProjected.p[1].w;
 				triProjected.t[2].u = triProjected.t[2].u / triProjected.p[2].w;
@@ -149,6 +153,7 @@ bool Renderer::NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject)
 				triProjected.t[0].v = triProjected.t[0].v / triProjected.p[0].w;
 				triProjected.t[1].v = triProjected.t[1].v / triProjected.p[1].w;
 				triProjected.t[2].v = triProjected.t[2].v / triProjected.p[2].w;
+				
 
 				triProjected.t[0].w = 1.0f / triProjected.p[0].w;
 				triProjected.t[1].w = 1.0f / triProjected.p[1].w;
@@ -182,7 +187,13 @@ bool Renderer::NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject)
 				triProjected.p[2].x *= 0.5f * (float)enginePointer->ScreenWidth();		  //(float)
 				triProjected.p[2].y *= 0.5f * (float)enginePointer->ScreenHeight();	  //(float)
 
+				// Copy texture info
+				// Not perfect because it copies the information from the mesh rather than the triangle itself
 				triProjected.textureCodeTri = meshObject.textureCodeMesh;
+
+				// Copy colour info
+				triProjected.colour = tri.colour;
+
 
 				// Store triangle for sorting
 				Object::vecTrianglesToRaster.push_back(triProjected);
@@ -369,6 +380,141 @@ void Renderer::TexturedTriangle(int x1, int y1, float u1, float v1, float w1,
 }
 
 
+void Renderer::colouredTriangle(int x1, int y1, float w1,
+	int x2, int y2, float w2,
+	int x3, int y3, float w3,
+	olc::Pixel _colour)
+{
+
+	if (y2 < y1)
+	{
+		std::swap(y1, y2);
+		std::swap(x1, x2);
+		std::swap(w1, w2);
+	}
+
+	if (y3 < y1)
+	{
+		std::swap(y1, y3);
+		std::swap(x1, x3);
+		std::swap(w1, w3);
+	}
+
+	if (y3 < y2)
+	{
+		std::swap(y2, y3);
+		std::swap(x2, x3);
+		std::swap(w2, w3);
+	}
+
+	int dy1 = y2 - y1;
+	int dx1 = x2 - x1;
+	float dw1 = w2 - w1;
+
+	int dy2 = y3 - y1;
+	int dx2 = x3 - x1;
+	float dw2 = w3 - w1;
+
+	float tex_u, tex_v, tex_w;
+
+	float dax_step = 0, dbx_step = 0,
+		du1_step = 0, dv1_step = 0,
+		du2_step = 0, dv2_step = 0,
+		dw1_step = 0, dw2_step = 0;
+
+	if (dy1) dax_step = dx1 / (float)abs(dy1);
+	if (dy2) dbx_step = dx2 / (float)abs(dy2);
+
+	if (dy1) dw1_step = dw1 / (float)abs(dy1);
+
+	if (dy2) dw2_step = dw2 / (float)abs(dy2);
+
+	if (dy1)
+	{
+		for (int i = y1; i <= y2; i++)
+		{
+			int ax = x1 + (float)(i - y1) * dax_step;
+			int bx = x1 + (float)(i - y1) * dbx_step;
+
+			float tex_sw = w1 + (float)(i - y1) * dw1_step;
+
+			float tex_ew = w1 + (float)(i - y1) * dw2_step;
+
+			if (ax > bx)
+			{
+				std::swap(ax, bx);
+				std::swap(tex_sw, tex_ew);
+			}
+
+			tex_w = tex_sw;
+
+			float tstep = 1.0f / ((float)(bx - ax));
+			float t = 0.0f;
+
+			for (int j = ax; j < bx; j++)
+			{
+				tex_w = (1.0f - t) * tex_sw + t * tex_ew;
+				if (tex_w > pDepthBuffer[i * enginePointer->ScreenWidth() + j])
+				{
+					enginePointer->Draw(j, i, _colour);
+					pDepthBuffer[i * enginePointer->ScreenWidth() + j] = tex_w;
+				}
+				t += tstep;
+			}
+
+		}
+	}
+
+	dy1 = y3 - y2;
+	dx1 = x3 - x2;
+	dw1 = w3 - w2;
+
+	if (dy1) dax_step = dx1 / (float)abs(dy1);
+	if (dy2) dbx_step = dx2 / (float)abs(dy2);
+
+	du1_step = 0, dv1_step = 0;
+	if (dy1) dw1_step = dw1 / (float)abs(dy1);
+
+	if (dy1)
+	{
+		for (int i = y2; i <= y3; i++)
+		{
+			int ax = x2 + (float)(i - y2) * dax_step;
+			int bx = x1 + (float)(i - y1) * dbx_step;
+
+			float tex_sw = w2 + (float)(i - y2) * dw1_step;
+
+			float tex_ew = w1 + (float)(i - y1) * dw2_step;
+
+			if (ax > bx)
+			{
+				std::swap(ax, bx);
+				std::swap(tex_sw, tex_ew);
+			}
+
+			tex_w = tex_sw;
+
+			float tstep = 1.0f / ((float)(bx - ax));
+			float t = 0.0f;
+
+			for (int j = ax; j < bx; j++)
+			{
+				tex_w = (1.0f - t) * tex_sw + t * tex_ew;
+
+				if (tex_w > pDepthBuffer[i * enginePointer->ScreenWidth() + j])
+				{
+					enginePointer->Draw(j, i, _colour);
+					pDepthBuffer[i * enginePointer->ScreenWidth() + j] = tex_w;
+				}
+				t += tstep;
+			}
+		}
+	}
+
+}
+
+
+
 void Renderer::renderTriangles()
 {
 	
@@ -434,7 +580,11 @@ void Renderer::renderTriangles()
 			{
 				// Just for debugging
 				// no depth buffer and no sorting of triangles...
-				enginePointer->FillTriangle(t.p[0].x, t.p[0].y, t.p[1].x, t.p[1].y, t.p[2].x, t.p[2].y, olc::YELLOW);
+				//enginePointer->FillTriangle(t.p[0].x, t.p[0].y, t.p[1].x, t.p[1].y, t.p[2].x, t.p[2].y, olc::YELLOW);
+				colouredTriangle(t.p[0].x, t.p[0].y, t.t[0].w,
+					t.p[1].x, t.p[1].y, t.t[1].w,
+					t.p[2].x, t.p[2].y, t.t[2].w,
+					t.colour);
 			}
 			
 

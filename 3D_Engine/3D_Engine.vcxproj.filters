@@ -15,6 +15,9 @@
     <Filter Include="Engine\Physics">
       <UniqueIdentifier>{239ed357-a73d-41e4-817c-389caf9fd7db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{c966e248-568b-4df7-ae6f-f45f9b6c41c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,9 @@
     </ClInclude>
     <ClInclude Include="boundingBox.h">
       <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

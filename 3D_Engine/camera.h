@@ -26,8 +26,8 @@ public:
 	void update(float fElapsedTime) // update every frame; 
 	{
 		// Create "Point At" Matrix for camera
-		olc::vec3d vUp = { 0,1,0 };
-		olc::vec3d vTarget = { 0,0,1 };
+		olc::vec3d vUp = { 0, 1, 0 };
+		olc::vec3d vTarget = { 0, 0, 1 };
 
 
 		
@@ -48,13 +48,6 @@ public:
 
 		// Make view matrix from camera
 		matView = Matrix_QuickInverse(matCamera);
-
-		/*
-		for(int i = 0; i < 3; i++)
-			for(int j = 0; j < 3; j++)
-				std::cout << matView.m[i][j] << "|";
-		std::cout << "\n";
-		*/
 	}
 
 	void setCameraPosition(olc::vec3d position) // set camera poistion

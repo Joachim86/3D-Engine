@@ -23,7 +23,7 @@ public:
 	olc::vec3d objectCoordinates;
 	olc::vec3d objectLookingDirection;
 
-	olc::Sprite* objectSprite; // Not in use right now
+	//olc::Sprite* objectSprite; // Not in use right now
 
 	olc::mat4x4 objectRotationMatrixX;
 	olc::mat4x4 objectRotationMatrixY;
@@ -31,7 +31,7 @@ public:
 	olc::mat4x4 objectMatrix;
 
 public:
-	Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour);
+	Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour);
 	~Object();
 
 	void setCoordinates(olc::vec3d _coordinates);
@@ -60,26 +60,15 @@ std::vector<olc::Sprite*> Object::spriteContainer;
 
 
 
-Object::Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour = olc::YELLOW)
+Object::Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour = olc::YELLOW)
 {
 	objectName = Name;
 	
-
-	if (_texturecode)
-	{
-		objectMesh.LoadFromObjectFile(meshFile, true);
-	}
-	else
-	{
-		objectMesh.LoadFromObjectFile(meshFile, false, _colour);
-	}
+	objectMesh.LoadFromObjectFile(meshFile, _colour);
 	objectMesh.textureCodeMesh = _texturecode;
-
-
+	
 	objectCoordinates = _coordinates_;
 
-	if (!sprite)
-		objectSprite = sprite;
 
 
 	ID = Object::numberOfObjects;
@@ -88,15 +77,14 @@ Object::Object(std::string Name, std::string meshFile, olc::Sprite* sprite, uint
 	objectRotationMatrixY = olc::Matrix_MakeIdentity();
 	objectRotationMatrixZ = olc::Matrix_MakeIdentity();
 
+	
 	Object::numberOfObjects++;
 }
 
 Object::~Object()
 {
 	Object::numberOfObjects--;
-	delete[] objectSprite;
-	//std::cout << "object deleted! objects left: " << Object::numberOfObjects << "\n";
-
+	//delete[] objectSprite;
 }
 
 void Object::setCoordinates(olc::vec3d _coordinates)

@@ -293,7 +293,7 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 
 
 
-		bool LoadFromObjectFile(std::string sFilename, bool bHasTexture = false, olc::Pixel _colour = YELLOW)
+		bool LoadFromObjectFile(std::string sFilename, olc::Pixel _colour = YELLOW)
 		{
 			std::ifstream f(sFilename);
 			if (!f.is_open())
@@ -304,9 +304,12 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 			std::vector<vec3d> verts;
 			std::vector<vec2d> texs;
 
+			bool bHasTextureCoordinates = false;
 
 			while (!f.eof())
 			{
+				
+
 				char line[128];
 				f.getline(line, 128);
 
@@ -322,6 +325,8 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 						vec2d v;
 						s >> junk >> junk >> v.u >> v.v;
 						texs.push_back(v);
+
+						bHasTextureCoordinates = true;
 					}
 					else
 					{
@@ -337,20 +342,25 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 				{
 					if (line[0] == 'f')
 					{
-						int f[3];
-						s >> junk >> f[0] >> f[1] >> f[2];
+						int f[3] = { 0 };
+						//s >> junk >> f[0] >> f[1] >> f[2];
+						//s >> junk >> junk >> f[0] >> junk >> f[1] >> junk >> f[2] >> junk;
+						//s >> f[0] >> f[1] >> f[2];
 
-						vec2d tempVec{ 0, 0, 1 };
+						std::cout << "whole line: " << line << "\n";
+						//std::cout << junk << "|" << f[0] << "|" << f[1] << "|" << f[2] << "\n";
 
-						tris.push_back({
-							verts[f[0] - 1],
-							verts[f[1] - 1],
-							verts[f[2] - 1],
-							tempVec,
-							tempVec,
-							tempVec,
-							_colour
-							});
+						std::cout << line[2] << line[4] << line[6] << line[8] << line[10] << line[12] << "\n";
+
+						triangle tempTris{
+							verts[f[0]],
+							verts[f[1]],
+							verts[f[2]]
+						};
+
+						tempTris.colour = _colour;
+
+						tris.push_back(tempTris);
 					}
 				}
 				else
@@ -389,7 +399,8 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 
 				}
 				*/
-
+				
+				//*
 				if (line[0] == 'f')
 				{
 					s >> junk;
@@ -411,17 +422,43 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 					tokens[nTokenCount].pop_back();
 
 
-					tris.push_back({
-						verts[stoi(tokens[0]) - 1],
-						verts[stoi(tokens[2]) - 1],
-						verts[stoi(tokens[4]) - 1],
-						texs[stoi(tokens[1]) - 1],
-						texs[stoi(tokens[3]) - 1],
-						texs[stoi(tokens[5]) - 1],
-						_colour
-						});
-				}
+					if (bHasTextureCoordinates)
+					{
+						tris.push_back({
+							verts[stoi(tokens[0]) - 1],
+							verts[stoi(tokens[2]) - 1],
+							verts[stoi(tokens[4]) - 1],
+							texs[stoi(tokens[1]) - 1],
+							texs[stoi(tokens[3]) - 1],
+							texs[stoi(tokens[5]) - 1],
+							_colour
+							});
+					}
+					else
+					{
+						try
+						{
+							triangle tempTris{
+							verts[stoi(tokens[0]) - 1],
+							verts[stoi(tokens[1]) - 1],
+							verts[stoi(tokens[2]) - 1]
+							};
+							tempTris.colour = _colour;
 
+							tris.push_back(tempTris);
+						}
+						catch (const std::exception& e)
+						{
+							std::cout << e.what() << "\n";
+						}
+
+						
+					}
+
+					
+					
+				}
+				//*/
 			}
 			return true;
 		}

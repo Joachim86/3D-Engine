@@ -76,9 +76,10 @@ public:
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Fadenkreuz.png"));
 
 
-		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", Object::spriteContainer[1], (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", Object::spriteContainer[2], (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 3", "Ressources/cube_2.obj", Object::spriteContainer[0], (uint8_t)0, olc::vec3d{ 10, 0, 0 }, olc::BLUE));
+		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
+		Object::objectVector.push_back(new Object("object 3", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 10, 0, 0 }, olc::BLUE));
+		Object::objectVector.push_back(new Object("object 4", "Ressources/ball2.obj", (uint8_t)0, olc::vec3d{ 15, 0, 0 }, olc::RED));
 
 		/*
 		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));

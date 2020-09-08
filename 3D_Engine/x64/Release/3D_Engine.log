@@ -1,10 +1,10 @@
 ﻿  main.cpp
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2469,22): warning C4018: "<=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2469,58): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2469,109): warning C4018: "<=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2469,146): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2792,46): warning C4244: "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2793,45): warning C4244: "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2506,22): warning C4018: "<=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2506,58): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2506,109): warning C4018: "<=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2506,146): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2829,46): warning C4244: "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\engine.h(2830,45): warning C4244: "Argument": Konvertierung von "WPARAM" in "const unsigned short", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(104,25): warning C4244: "=": Konvertierung von "double" in "float", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(114,1): warning C4305: "-=": Verkürzung von "double" in "float"
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\camera.h(122,1): warning C4305: "-=": Verkürzung von "double" in "float"
@@ -39,11 +39,11 @@ C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(594,59): warnin
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(594,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(594,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\object\construct.h(167,21): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(236,36): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(236,28): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(237,36): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(237,28): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
   Code wird generiert.
-  51 of 932 functions ( 5.5%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    37 functions had inline decision re-evaluated but remain unchanged
+  7 of 931 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    46 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   3D_Engine.vcxproj -> C:\Users\Joachim\Documents\Github\3D-Engine\x64\Release\3D_Engine.exe

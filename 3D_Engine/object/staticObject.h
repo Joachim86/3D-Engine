@@ -14,7 +14,7 @@ public:
 	void update() override;
 };
 
-staticObject::staticObject(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_) : Object(Name, meshFile, sprite, _texturecode, _coordinates_)
+staticObject::staticObject(std::string Name, std::string meshFile, olc::Sprite* sprite, uint8_t _texturecode, olc::vec3d _coordinates_) : Object(Name, meshFile,  _texturecode, _coordinates_)
 {
 
 }

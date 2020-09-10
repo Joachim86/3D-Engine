@@ -43,6 +43,8 @@ namespace jph
 		jVector2D start;
 		jVector2D end;
 
+		jVector2D offsetPosition = { 0 , 0 };
+
 		float radius;
 	};
 
@@ -60,6 +62,8 @@ namespace jph
 		float friction;
 		float simTimeRemaining;
 		float efficiency;
+
+		bool isStatic = false;
 	};
 
 	struct jRectangle
@@ -111,11 +115,11 @@ namespace jph
 	public:
 		jph::jErrorCode Start();
 
-		unsigned int addCircle(jVector2D position, float radius, jVector2D velocity, jVector2D acceleration, float mass, float friction, float efficiency);
+		unsigned int addCircle(jVector2D position, float radius, jVector2D velocity, jVector2D acceleration, float mass, float friction, float efficiency, bool _isStatic);
 
 		unsigned int addLine(jVector2D positionStart, jVector2D positionEnd, float radius);
 
-		void removeObjectByID(unsigned int IDtoErase);
+		bool removeObjectByID(unsigned int IDtoErase);
 
 		void update(float fElapsedTime);
 	public:
@@ -123,13 +127,12 @@ namespace jph
 		std::vector<jLine> vecLines;
 
 		float worldDrag = 0.0f; // 0.8 = normal
-		float worldGravity = 100.0f; // 100 = normal
+		float worldGravity = -0.0f; // 100 = normal
 
 	private:
 		static std::atomic<bool> bAtomActive; // Thread shared
 
-		unsigned int iNumberOfCircles;
-		unsigned int iNumberOfLines;
+		unsigned int iNumberOfObjects;
 
 	private:
 		bool DoCirclesOverlap(float x1, float y1, float r1, float x2, float y2, float r2);
@@ -138,8 +141,7 @@ namespace jph
 
 	Jphysics::Jphysics()
 	{
-		iNumberOfCircles = 0;
-		iNumberOfLines = 0;
+		iNumberOfObjects = 0;
 	}
 
 	jph::jErrorCode Jphysics::Start()
@@ -156,11 +158,11 @@ namespace jph
 		return jph::OK;
 	}
 
-	inline unsigned int Jphysics::addCircle(jVector2D position, float radius, jVector2D velocity = { 0, 0 }, jVector2D acceleration = { 0, 0 }, float mass = 0, float friction = 0, float efficiency = 1)
+	inline unsigned int Jphysics::addCircle(jVector2D position, float radius, jVector2D velocity = { 0, 0 }, jVector2D acceleration = { 0, 0 }, float mass = 0, float friction = 0, float efficiency = 1, bool _isStatic = false)
 	{
 		jCircle circleToAdd;
 
-		circleToAdd.ID = iNumberOfCircles++;
+		circleToAdd.ID = iNumberOfObjects++;
 
 		circleToAdd.position = position;
 		circleToAdd.velocity = velocity;
@@ -170,6 +172,7 @@ namespace jph
 		circleToAdd.mass = mass;
 		circleToAdd.friction = friction;
 		circleToAdd.efficiency = efficiency;
+		circleToAdd.isStatic = _isStatic;
 
 		vecCircles.emplace_back(circleToAdd);
 
@@ -180,7 +183,7 @@ namespace jph
 	{
 		jLine lineToAdd;
 
-		lineToAdd.ID = iNumberOfLines++;
+		lineToAdd.ID = iNumberOfObjects++;
 
 		lineToAdd.start = positionStart;
 		lineToAdd.end = positionEnd;
@@ -191,9 +194,27 @@ namespace jph
 		return lineToAdd.ID;
 	}
 
-	inline void Jphysics::removeObjectByID(unsigned int IDtoErase)
+	inline bool Jphysics::removeObjectByID(unsigned int IDtoErase)
 	{
+		for (int i = 0; i < vecCircles.size(); i++)
+		{
+			if (vecCircles[i].ID == IDtoErase)
+			{
+				vecCircles.erase(vecCircles.begin() + i);
+				return true;
+			}
+		}
 
+		for (int j = 0; j < vecLines.size(); j++)
+		{
+			if (vecLines[j].ID == IDtoErase)
+			{
+				vecLines.erase(vecLines.begin() + j);
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	inline void Jphysics::update(float fElapsedTime)
@@ -201,7 +222,7 @@ namespace jph
 		std::vector<std::pair<jCircle*, jCircle*>> vecCollidingPairs;
 		std::vector<jCircle*> vecFakeBalls; //not needed yet
 
-		float fStable = 0.005f;
+		float fStable = 0.001f;
 
 		int nSimulationUpdates = 4;
 
@@ -228,7 +249,7 @@ namespace jph
 						circle.positionOld.y = circle.position.y;
 
 						circle.acceleration.x = -circle.velocity.x * worldDrag;
-						circle.acceleration.y = -circle.velocity.y * worldDrag + worldGravity;
+						circle.acceleration.y = -circle.velocity.y * worldDrag + (circle.isStatic ? 0 : worldGravity);
 
 						circle.velocity.x += circle.acceleration.x * circle.simTimeRemaining;
 						circle.velocity.y += circle.acceleration.y * circle.simTimeRemaining;
@@ -236,13 +257,14 @@ namespace jph
 						circle.position.x += circle.velocity.x * circle.simTimeRemaining;	// Update position
 						circle.position.y += circle.velocity.y * circle.simTimeRemaining;
 
-
+						
 						// Stop ball when velocity is neglible
 						if (fabs(circle.velocity.x * circle.velocity.x + circle.velocity.y * circle.velocity.y) < fStable)
 						{
 							circle.velocity.x = 0;
 							circle.velocity.y = 0;
 						}
+						
 					}
 				}
 

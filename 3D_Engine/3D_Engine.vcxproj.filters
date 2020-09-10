@@ -46,11 +46,11 @@
     <ClInclude Include="boundingBox.h">
       <Filter>Engine\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Game</Filter>
-    </ClInclude>
     <ClInclude Include="J_physics.h">
       <Filter>Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="pongAI.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -133,7 +133,7 @@
     <ClInclude Include="object\construct.h" />
     <ClInclude Include="object\object.h" />
     <ClInclude Include="object\staticObject.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="pongAI.h" />
     <ClInclude Include="renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

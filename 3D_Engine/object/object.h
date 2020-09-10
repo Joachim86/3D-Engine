@@ -31,7 +31,8 @@ public:
 	olc::mat4x4 objectMatrix;
 
 public:
-	Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour);
+	Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc::vec3d _coordinates, olc::Pixel _colour);
+	Object(std::string Name, olc::vec3d _coordinates, olc::vec3d _size, olc::Pixel _colour);
 	~Object();
 
 	void setCoordinates(olc::vec3d _coordinates);
@@ -60,14 +61,14 @@ std::vector<olc::Sprite*> Object::spriteContainer;
 
 
 
-Object::Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc::vec3d _coordinates_, olc::Pixel _colour = olc::YELLOW)
+Object::Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc::vec3d _coordinates, olc::Pixel _colour = olc::YELLOW)
 {
 	objectName = Name;
 	
 	objectMesh.LoadFromObjectFile(meshFile, _colour);
 	objectMesh.textureCodeMesh = _texturecode;
 	
-	objectCoordinates = _coordinates_;
+	objectCoordinates = _coordinates;
 
 
 
@@ -79,6 +80,20 @@ Object::Object(std::string Name, std::string meshFile, uint8_t _texturecode, olc
 
 	
 	Object::numberOfObjects++;
+}
+
+Object::Object(std::string Name, olc::vec3d _coordinates, olc::vec3d _size, olc::Pixel _colour)
+{
+	objectName = Name;
+
+	objectMesh.MakeMesh(_size.x, _size.y, _size.z, Object::objectVector[0]->objectMesh.tris[0], _colour);
+	objectMesh.textureCodeMesh = 0;
+
+	objectCoordinates = _coordinates;
+
+
+
+	ID = Object::numberOfObjects++;
 }
 
 Object::~Object()

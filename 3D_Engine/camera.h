@@ -20,7 +20,10 @@ public:
 
 	void setFieldOfView(float angle)
 	{
-		matProj = olc::Matrix_MakeProjection(angle, (float)olcEnginePointer->ScreenHeight() / (float)olcEnginePointer->ScreenWidth(), 0.1f, 1000.0f);
+		float fNear = 0.1f;
+		float fFar = 10.0f;
+
+		matProj = olc::Matrix_MakeProjection(angle, (float)olcEnginePointer->ScreenHeight() / (float)olcEnginePointer->ScreenWidth(), fNear, fFar);
 	}
 
 	void update(float fElapsedTime) // update every frame; 

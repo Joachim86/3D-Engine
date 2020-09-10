@@ -336,71 +336,6 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 					}
 				}
 
-				// Old version
-				/*
-				if (!bHasTexture)
-				{
-					if (line[0] == 'f')
-					{
-						int f[3] = { 0 };
-						//s >> junk >> f[0] >> f[1] >> f[2];
-						//s >> junk >> junk >> f[0] >> junk >> f[1] >> junk >> f[2] >> junk;
-						//s >> f[0] >> f[1] >> f[2];
-
-						std::cout << "whole line: " << line << "\n";
-						//std::cout << junk << "|" << f[0] << "|" << f[1] << "|" << f[2] << "\n";
-
-						std::cout << line[2] << line[4] << line[6] << line[8] << line[10] << line[12] << "\n";
-
-						triangle tempTris{
-							verts[f[0]],
-							verts[f[1]],
-							verts[f[2]]
-						};
-
-						tempTris.colour = _colour;
-
-						tris.push_back(tempTris);
-					}
-				}
-				else
-				{
-					if (line[0] == 'f')
-					{
-						s >> junk;
-
-						std::string tokens[6];
-						int nTokenCount = -1;
-
-
-						while (!s.eof())
-						{
-							char c = s.get();
-							if (c == ' ' || c == '/')
-								nTokenCount++;
-							else
-								tokens[nTokenCount].append(1, c);
-						}
-
-
-						tokens[nTokenCount].pop_back();
-
-
-						tris.push_back({
-							verts[stoi(tokens[0]) - 1],
-							verts[stoi(tokens[2]) - 1],
-							verts[stoi(tokens[4]) - 1],
-							texs[stoi(tokens[1]) - 1],
-							texs[stoi(tokens[3]) - 1],
-							texs[stoi(tokens[5]) - 1],
-							_colour
-							});
-					}
-
-				}
-				*/
-				
-				//*
 				if (line[0] == 'f')
 				{
 					s >> junk;
@@ -458,8 +393,38 @@ namespace olc // All OneLoneCoder stuff will now exist in the "olc" namespace
 					
 					
 				}
-				//*/
 			}
+			return true;
+		}
+
+		bool MakeMesh(float _height, float _width, float _length, triangle test, olc::Pixel _colour = olc::YELLOW) // Maybe add texture later
+		{
+			triangle temp;
+			/*
+			// Front side 1
+			temp.p[0].x = -_height / 2;
+			temp.p[0].y = -_width / 2;
+			temp.p[0].z = -_length / 2;
+
+			temp.p[1].x = _height / 2;
+			temp.p[1].y = -_width / 2;
+			temp.p[1].z = -_length / 2;
+
+			temp.p[2].x = _height / 2;
+			temp.p[2].y = _width / 2;
+			temp.p[2].z = -_length / 2;
+
+			temp.colour = _colour;
+
+			tris.push_back(temp);
+			*/
+
+
+			// Front side 1
+			tris.push_back(test);
+
+			std::cout << "number of triangles: " << tris.size() << "\n";
+
 			return true;
 		}
 	};

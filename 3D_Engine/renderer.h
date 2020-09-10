@@ -5,7 +5,7 @@
 #include "object/object.h"
 #include "object/staticObject.h"
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE false
 
 class Renderer
 {

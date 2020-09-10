@@ -4,6 +4,7 @@
 #include "camera.h"
 #include "renderer.h"
 #include "object/construct.h"
+#include "J_physics.h"
 
 
 
@@ -17,8 +18,9 @@ public:
 
 
 private:
-	Camera* Camera1;
-	Renderer* Renderer1;
+	Camera*			Camera1;
+	Renderer*		Renderer1;
+	jph::Jphysics	physicsEngine;
 
 	float fieldOfView = 90;
 
@@ -76,10 +78,11 @@ public:
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Fadenkreuz.png"));
 
 
-		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", (uint8_t)1, olc::vec3d{ 0, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", (uint8_t)2, olc::vec3d{ 5, 0, 0 }));
-		Object::objectVector.push_back(new Object("object 3", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 10, 0, 0 }, olc::BLUE));
-		Object::objectVector.push_back(new Object("object 4", "Ressources/ball2.obj", (uint8_t)0, olc::vec3d{ 15, 0, 0 }, olc::RED));
+		Object::objectVector.push_back(new Object("object 1", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 50, 0, 50 }, olc::RED));
+		Object::objectVector.push_back(new Object("object 2", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 50, 0, 50 }, olc::DARK_BLUE));
+		
+		
+		
 
 		/*
 		Object::objectVector.push_back(new Object("object 3", "Ressources/gun.obj", Object::spriteContainer[3], (uint8_t)3, olc::vec3d{ 5, 0, 2 }));
@@ -109,6 +112,29 @@ public:
 		Object::objectVector.push_back(new Object("Gras 12", "Ressources/Gras.obj", Object::spriteContainer[5], (uint8_t)5, olc::vec3d{ 32, 0, 16 }));
 		*/
 
+		
+
+		//Remember that the physics engine is only in 2d
+		//The default orientation is looking down so y and z coordinates
+		//correlate to x and y coordinates in the physics engine
+
+		//Start physics engine
+		physicsEngine.Start();
+
+		Object::objectVector.push_back(new Object("physics", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 0, 0, 0 }, olc::GREEN));
+		Object::objectVector.push_back(new Object("physics", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 0, 25, 0 }, olc::GREEN));
+		Object::objectVector.push_back(new Object("physics", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 25, 0, 0 }, olc::GREEN));
+		Object::objectVector.push_back(new Object("physics", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 25, 25, 0 }, olc::GREEN));
+
+		physicsEngine.addLine(jph::jVector2D{ 0, 0 }, jph::jVector2D{ 25, 0 }, 0); //Oben
+		physicsEngine.addLine(jph::jVector2D{ 0, 25 }, jph::jVector2D{ 25, 25 }, 0); //Unten
+		physicsEngine.addLine(jph::jVector2D{ 0, 0 }, jph::jVector2D{ 0, 25 }, 0); //Links
+		physicsEngine.addLine(jph::jVector2D{ 25, 0 }, jph::jVector2D{ 25, 25 }, 0); //Rechts
+
+		physicsEngine.addCircle(jph::jVector2D{ 5, 9 }, 1, jph::jVector2D{ 10, 10 }, jph::jVector2D{ 0, 0 }, 1);
+		physicsEngine.addCircle(jph::jVector2D{ 7, 5 }, 1, jph::jVector2D{ -10, 10 }, jph::jVector2D{ 0, 0 }, 1);
+
+
 		//Create camera
 		Camera1 = new Camera(this);
 		Camera1->setCameraPosition(olc::vec3d{ 0, 0, -5, 1 });
@@ -120,15 +146,14 @@ public:
 
 
 		//Set Mouse up
-		SetMouseCenter(false);
+		SetMouseCenter(true);
 
 
 		//Set Pixel Mode, may be costly
 		SetPixelMode(olc::Pixel::ALPHA);
 
 
-
-
+		
 
 		nGameState = GS_TITLE;
 		return true;
@@ -213,9 +238,10 @@ public:
 			SetMouseCenter(false);
 		}
 
-		if (GetKey(olc::ENTER).bHeld) //Set Mouse Center
+		if (GetKey(olc::ENTER).bReleased) //Set Mouse Center
 		{
-			SetMouseCenter(true);
+			physicsEngine.worldGravity *=  -1;
+
 		}
 
 
@@ -238,8 +264,10 @@ public:
 
 
 
-		// Testing
-		//construct1->update();
+		// Update physics Engine
+		physicsEngine.update(fElapsedTime);
+		Object::objectVector[0]->setCoordinates(olc::vec3d{ physicsEngine.vecCircles[0].position.x, physicsEngine.vecCircles[0].position.y, 0});
+		Object::objectVector[1]->setCoordinates(olc::vec3d{ physicsEngine.vecCircles[1].position.x, physicsEngine.vecCircles[1].position.y, 0});
 
 		
 		
@@ -274,10 +302,17 @@ int main()
 {
 	Engine3D demo;
 
-	//ShowCursor(NULL);
-
+	ShowCursor(NULL);
 	if (demo.Construct(960, 540, 1, 1, false))
 		demo.Start();
+	
+
+	/*
+	ShowCursor(NULL);
+
+	if (demo.Construct(1920, 1080, 1, 1, true))
+		demo.Start();
+		*/
 
 	return 0;
 }

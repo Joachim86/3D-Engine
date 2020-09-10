@@ -129,6 +129,7 @@
     <ClInclude Include="boundingBox.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="engine.h" />
+    <ClInclude Include="J_physics.h" />
     <ClInclude Include="object\construct.h" />
     <ClInclude Include="object\object.h" />
     <ClInclude Include="object\staticObject.h" />

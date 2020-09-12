@@ -360,7 +360,13 @@ namespace jph
 				// Now work out dynamic collisions
 				for (auto c : vecCollidingPairs)
 				{
-					jCircle* b1 = c.first, * b2 = c.second;
+					jCircle* b1 = c.first;
+					jCircle* b2 = c.second;
+
+					// Is circle static
+					//if (b1->isStatic) b1->mass = b2->mass * b2->efficiency;
+					//if (b2->isStatic) b2->mass = b1->mass * b1->efficiency;
+
 
 					// Distance between balls
 					float fDistance = sqrtf((b1->position.x - b2->position.x) * (b1->position.x - b2->position.x) + (b1->position.y - b2->position.y) * (b1->position.y - b2->position.y));
@@ -382,14 +388,69 @@ namespace jph
 					float dpNorm2 = b2->velocity.x * nx + b2->velocity.y * ny;
 
 					// Conservation of momentum in 1D
+					//float m1 = b1->efficiency * (dpNorm1 * (b1->mass - b2->mass) + 2.0f * b2->mass * dpNorm2) / (b1->mass + b2->mass);
+					//float m2 = b1->efficiency * (dpNorm2 * (b2->mass - b1->mass) + 2.0f * b1->mass * dpNorm1) / (b1->mass + b2->mass);
+
 					float m1 = b1->efficiency * (dpNorm1 * (b1->mass - b2->mass) + 2.0f * b2->mass * dpNorm2) / (b1->mass + b2->mass);
-					float m2 = b1->efficiency * (dpNorm2 * (b2->mass - b1->mass) + 2.0f * b1->mass * dpNorm1) / (b1->mass + b2->mass);
+					float m2 = b2->efficiency * (dpNorm2 * (b2->mass - b1->mass) + 2.0f * b1->mass * dpNorm1) / (b1->mass + b2->mass);
 
 					// Update ball velocities
+					/*
 					b1->velocity.x = tx * dpTan1 + nx * m1;
 					b1->velocity.y = ty * dpTan1 + ny * m1;
 					b2->velocity.x = tx * dpTan2 + nx * m2;
 					b2->velocity.y = ty * dpTan2 + ny * m2;
+					*/
+
+
+					
+					if (b1->isStatic || b2->isStatic)
+					{
+						if (b1->isStatic)
+						{
+							b2->velocity.x = tx * dpTan2 + nx * m2 * 3;
+							b2->velocity.y = ty * dpTan2 + ny * m2 * 3;
+						}
+						
+						if (b2->isStatic)
+						{
+							b1->velocity.x = tx * dpTan1 + nx * m1 * 3;
+							b1->velocity.y = ty * dpTan1 + ny * m1 * 3;
+						}
+					}
+					else
+					{
+						b1->velocity.x = tx * dpTan1 + nx * m1;
+						b1->velocity.y = ty * dpTan1 + ny * m1;
+						b2->velocity.x = tx * dpTan2 + nx * m2;
+						b2->velocity.y = ty * dpTan2 + ny * m2;
+					}
+					
+
+					/*
+					if (b1->isStatic)
+					{
+						b1->velocity.x *= -1;
+						b1->velocity.y *= -1;
+					}
+					else
+					{
+						b1->velocity.x = tx * dpTan1 + nx * m1;
+						b1->velocity.y = ty * dpTan1 + ny * m1;
+					}
+
+					if (b2->isStatic)
+					{
+						b2->velocity.x *= -1;
+						b2->velocity.y *= -1;
+					}
+					else
+					{
+						b2->velocity.x = tx * dpTan2 + nx * m2;
+						b2->velocity.y = ty * dpTan2 + ny * m2;
+					}
+					*/
+					
 				}
 
 				// Remove collisions

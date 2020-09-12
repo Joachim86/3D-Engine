@@ -5,6 +5,7 @@
 #include "renderer.h"
 #include "object/construct.h"
 #include "J_physics.h"
+#include "pongAI.h"
 
 
 
@@ -21,6 +22,7 @@ private:
 	Camera*			Camera1;
 	Renderer*		Renderer1;
 	jph::Jphysics*	physicsEngine;
+	pongAI*			pongAI1;
 
 	float fieldOfView = 90;
 
@@ -101,6 +103,9 @@ public:
 
 		//Create physics engine
 		physicsEngine = new jph::Jphysics;
+
+		//Create AI
+		pongAI1 = new pongAI;
 
 
 		//Adjust Font for Title
@@ -207,14 +212,15 @@ public:
 		//Start physics engine
 		physicsEngine->Start();
 
-		
+		physicsEngine->addCircle(jph::jVector2D{ 12.5, 25 }, 0.5f, jph::jVector2D{ 0, -10 }, jph::jVector2D{ 0, 0 }, 1, 0, 1.01);
 
 		// left player
-		physicsEngine->addLine(jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x - 3, 0 }, jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x + 3, 0 }, 1);
+		//physicsEngine->addLine(jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x - 3, 0 }, jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x + 3, 0 }, 1);
+		physicsEngine->addCircle(jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x, Object::objectVector[2]->objectCoordinates.z }, 3.0f, jph::jVector2D{ 0, 0 }, jph::jVector2D{ 0, 0 }, 2, 0, 1, true);
 
 		// right ai
-		physicsEngine->addLine(jph::jVector2D{ Object::objectVector[3]->objectCoordinates.x - 3, 50 }, jph::jVector2D{ Object::objectVector[3]->objectCoordinates.x + 3, 50 }, 1);
-
+		//physicsEngine->addLine(jph::jVector2D{ Object::objectVector[3]->objectCoordinates.x - 3, 50 }, jph::jVector2D{ Object::objectVector[3]->objectCoordinates.x + 3, 50 }, 1);
+		physicsEngine->addCircle(jph::jVector2D{ Object::objectVector[3]->objectCoordinates.x, Object::objectVector[3]->objectCoordinates.z }, 3.0f, jph::jVector2D{ 0, 0 }, jph::jVector2D{ 0, 0 }, 2, 0, 1, true);
 
 		//physicsEngine->addLine(jph::jVector2D{ 0, 0 }, jph::jVector2D{ 25, 0 }, 0);	// Links
 		//physicsEngine->addLine(jph::jVector2D{ 0, 50 }, jph::jVector2D{ 25, 50 }, 0);	// Rechts
@@ -222,7 +228,7 @@ public:
 		physicsEngine->addLine(jph::jVector2D{ 0, 0 }, jph::jVector2D{ 0, 50 }, 0);		// Unten
 		physicsEngine->addLine(jph::jVector2D{ 25, 0 }, jph::jVector2D{ 25, 50 }, 0);	// Oben
 
-		physicsEngine->addCircle(jph::jVector2D{ 12.5, 25 }, 0.5f, jph::jVector2D{ 0, -15 }, jph::jVector2D{ 0, 0 }, 1, 0, 1.01);
+		
 
 
 
@@ -247,37 +253,45 @@ public:
 
 
 		// Update movement
-		/*
-		movement(fElapsedTime);
-		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
-		*/
+		
+		//movement(fElapsedTime);
+		//Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
+		
 
 
 		if (GetKey(olc::UP).bHeld)
 		{
-			physicsEngine->vecLines[0].start.x += 4 * fElapsedTime;
-			physicsEngine->vecLines[0].end.x += 4 * fElapsedTime;
-
-			physicsEngine->vecLines[1].start.x += 4 * fElapsedTime;
-			physicsEngine->vecLines[1].end.x += 4 * fElapsedTime;
+			physicsEngine->vecCircles[1].position.x += 5 * fElapsedTime;
 		}
 			
 		if (GetKey(olc::DOWN).bHeld)
 		{
-			physicsEngine->vecLines[0].start.x -= 4 * fElapsedTime;
-			physicsEngine->vecLines[0].end.x -= 4 * fElapsedTime;
-
-			physicsEngine->vecLines[1].start.x -= 4 * fElapsedTime;
-			physicsEngine->vecLines[1].end.x -= 4 * fElapsedTime;
+			physicsEngine->vecCircles[1].position.x -= 5 * fElapsedTime;
 		}
-			
+
 		
+		if (GetKey(olc::RIGHT).bHeld)
+		{
+			physicsEngine->vecCircles[1].position.y += 5 * fElapsedTime;
+		}
+
+		if (GetKey(olc::LEFT).bHeld)
+		{
+			physicsEngine->vecCircles[1].position.y -= 5 * fElapsedTime;
+		}
+
+		
+		float offset = 0;
+		//pongAI1->update(fElapsedTime, physicsEngine->vecCircles[0].position.x, physicsEngine->vecCircles[0].position.y, physicsEngine->vecLines[1].start.x, physicsEngine->vecLines[1].end.x);
+		pongAI1->update(fElapsedTime, physicsEngine->vecCircles[0].position.x, physicsEngine->vecCircles[0].position.y, physicsEngine->vecCircles[2].position.x);
+
 
 		// Update physics Engine
 		physicsEngine->update(fElapsedTime);
 		Object::objectVector[0]->setCoordinates(olc::vec3d{ physicsEngine->vecCircles[0].position.x, 0, physicsEngine->vecCircles[0].position.y });
-		Object::objectVector[2]->setCoordinates(olc::vec3d{ physicsEngine->vecLines[0].start.x + 3, Object::objectVector[2]->objectCoordinates.y, Object::objectVector[2]->objectCoordinates.z });
-		Object::objectVector[3]->setCoordinates(olc::vec3d{ physicsEngine->vecLines[1].start.x + 3, Object::objectVector[3]->objectCoordinates.y, Object::objectVector[3]->objectCoordinates.z });
+		Object::objectVector[2]->setCoordinates(olc::vec3d{ physicsEngine->vecCircles[1].position.x, Object::objectVector[2]->objectCoordinates.y, physicsEngine->vecCircles[1].position.y });
+		Object::objectVector[3]->setCoordinates(olc::vec3d{ physicsEngine->vecCircles[2].position.x, Object::objectVector[3]->objectCoordinates.y, physicsEngine->vecCircles[2].position.y });
+
 		
 
 		// Game rules
@@ -287,6 +301,9 @@ public:
 
 			physicsEngine->vecCircles[0].position.x = 12.5;
 			physicsEngine->vecCircles[0].position.y = 25;
+
+			physicsEngine->vecCircles[0].velocity.x = 0;
+			physicsEngine->vecCircles[0].velocity.y = -10;
 		}
 		else if (physicsEngine->vecCircles[0].position.y >= 50)
 		{
@@ -294,6 +311,9 @@ public:
 
 			physicsEngine->vecCircles[0].position.x = 12.5;
 			physicsEngine->vecCircles[0].position.y = 25;
+
+			physicsEngine->vecCircles[0].velocity.x = 0;
+			physicsEngine->vecCircles[0].velocity.y = 10;
 		}
 
 
@@ -335,7 +355,7 @@ int main()
 
 	
 	ShowCursor(false);
-	if (demo.Construct(960, 540, 1, 1, true))
+	if (demo.Construct(960, 540, 1, 1, false))
 		demo.Start();
 	
 

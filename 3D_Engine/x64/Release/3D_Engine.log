@@ -39,17 +39,18 @@ C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(594,59): warnin
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(594,49): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\renderer.h(594,39): warning C4244: "Argument": Konvertierung von "float" in "int32_t", möglicher Datenverlust
 C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\object\construct.h(167,21): warning C4244: "=": Konvertierung von "int" in "float", möglicher Datenverlust
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(114,1): warning C4305: "Argument": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(115,1): warning C4305: "Initialisierung": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(138,1): warning C4305: "=": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(149,1): warning C4305: "=": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(197,1): warning C4305: "Argument": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(201,1): warning C4305: "Argument": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(215,1): warning C4305: "Argument": Verkürzung von "double" in "float"
-C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(335,1): warning C4267: "Argument": Konvertierung von "size_t" nach "int32_t", Datenverlust möglich
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(115,1): warning C4305: "Argument": Verkürzung von "double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(116,1): warning C4305: "Initialisierung": Verkürzung von "double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(152,1): warning C4305: "=": Verkürzung von "double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(190,1): warning C4267: "Argument": Konvertierung von "size_t" nach "int32_t", Datenverlust möglich
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(208,1): warning C4305: "Argument": Verkürzung von "const double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(225,1): warning C4305: "Argument": Verkürzung von "double" in "float"
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(267,36): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(267,28): warning C4244: "Argument": Konvertierung von "int" in "float", möglicher Datenverlust
+C:\Users\Joachim\Documents\Github\3D-Engine\3D_Engine\main.cpp(344,1): warning C4267: "Argument": Konvertierung von "size_t" nach "int32_t", Datenverlust möglich
   Code wird generiert.
-  3 of 1136 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  2 of 1142 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    5 functions had inline decision re-evaluated but remain unchanged
   Codegenerierung ist abgeschlossen.
   3D_Engine.vcxproj -> C:\Users\Joachim\Documents\Github\3D-Engine\x64\Release\3D_Engine.exe

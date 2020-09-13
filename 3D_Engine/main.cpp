@@ -81,6 +81,7 @@ public:
 		Object::spriteContainer.push_back(new olc::Sprite);
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/cursor.png"));
 		Object::spriteContainer.push_back(new olc::Sprite("Ressources/Pong.png"));
+		Object::spriteContainer.push_back(new olc::Sprite("Ressources/tastenbelegung.png"));
 
 		Ball =	new Object("ball", "Ressources/ball3.obj", (uint8_t)0, olc::vec3d{ 0, 0, 0 }, olc::GREEN);
 		Cube =	new Object("Cube", "Ressources/cube_2.obj", (uint8_t)0, olc::vec3d{ 0, 0, 0 }, olc::GREEN);
@@ -96,7 +97,7 @@ public:
 		Renderer1 = new Renderer(this, Camera1);
 
 		//Set Mouse up
-		SetMouseCenter(true);
+		SetMouseCenter(false);
 
 		//Set Pixel Mode, may be costly
 		SetPixelMode(olc::Pixel::ALPHA);
@@ -130,7 +131,8 @@ public:
 		}
 
 		//Fast Forward
-		if (GetKey(olc::SPACE).bHeld || GetKey(olc::ENTER).bHeld)
+		/*
+		if (GetMouse(0).bPressed || GetKey(olc::ENTER).bHeld)
 		{
 			Object::objectVector.erase(Object::objectVector.begin());
 
@@ -140,8 +142,9 @@ public:
 
 			nGameState = GS_PREPARE;
 		}
+		*/
 
-		if (Camera1->vCamera.x <= -14)
+		if (GetKey(olc::ENTER).bHeld && Camera1->vCamera.x <= -16) // was -14
 		{
 			Object::objectVector.erase(Object::objectVector.begin());
 
@@ -179,8 +182,16 @@ public:
 		// Render Objects
 		Renderer1->update();
 
+		// Draw keyboard layout
+		if (Camera1->vCamera.x <= -14)
+		{
+			DrawSprite(10, 75, Object::spriteContainer[3], 1);
+			std::string pressEnter = "PRESS ENTER TO PROCEED";
+			DrawString(ScreenWidth() / 2 - 4 * 8 * (pressEnter.size() / 2), ScreenHeight() - 4 * 8 - 10, pressEnter, olc::GREY, 4);
+		}
+
 		// Draw Cursor (Always render last)
-		DrawSprite(GetMouseX(), GetMouseY(), Object::spriteContainer[1], 1);
+		//DrawSprite(GetMouseX(), GetMouseY(), Object::spriteContainer[1], 1);
 		
 		return true;
 	}
@@ -194,11 +205,10 @@ public:
 		Object::objectVector.push_back(new Object(*Plane));
 
 		Pong->objectCoordinates = olc::vec3d{ 12.5, 0, 0 };
-		Pong->setRotationY(olc::PI / 2);
+		Pong->setRotationY(olc::PI);
 		Object::objectVector.push_back(new Object(*Pong));
 
 		Pong2->objectCoordinates = olc::vec3d{ 12.5, 0, 50 };
-		Pong2->setRotationY(olc::PI / 2);
 		Object::objectVector.push_back(new Object(*Pong2));
 
 
@@ -229,7 +239,7 @@ public:
 		physicsEngine->addLine(jph::jVector2D{ 25, 0 }, jph::jVector2D{ 25, 50 }, 0);	// Oben
 
 		
-
+		SetMouseCenter(true);
 
 
 		nGameState = GS_MAIN;
@@ -253,23 +263,22 @@ public:
 
 
 		// Update movement
-		
-		//movement(fElapsedTime);
-		//Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
+		movement(fElapsedTime);
+		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
 		
 
 
-		if (GetKey(olc::UP).bHeld)
+		if (GetKey(olc::UP).bHeld && physicsEngine->vecCircles[1].position.x < 22 - 5 * fElapsedTime)
 		{
 			physicsEngine->vecCircles[1].position.x += 5 * fElapsedTime;
 		}
 			
-		if (GetKey(olc::DOWN).bHeld)
+		if (GetKey(olc::DOWN).bHeld && physicsEngine->vecCircles[1].position.x > 3 + 5 * fElapsedTime)
 		{
 			physicsEngine->vecCircles[1].position.x -= 5 * fElapsedTime;
 		}
 
-		
+		/*
 		if (GetKey(olc::RIGHT).bHeld)
 		{
 			physicsEngine->vecCircles[1].position.y += 5 * fElapsedTime;
@@ -279,7 +288,7 @@ public:
 		{
 			physicsEngine->vecCircles[1].position.y -= 5 * fElapsedTime;
 		}
-
+		*/
 		
 		float offset = 0;
 		//pongAI1->update(fElapsedTime, physicsEngine->vecCircles[0].position.x, physicsEngine->vecCircles[0].position.y, physicsEngine->vecLines[1].start.x, physicsEngine->vecLines[1].end.x);
@@ -355,7 +364,7 @@ int main()
 
 	
 	ShowCursor(false);
-	if (demo.Construct(960, 540, 1, 1, false))
+	if (demo.Construct(960, 540, 1, 1, true))
 		demo.Start();
 	
 
@@ -422,21 +431,15 @@ void Engine3D::movement(float fElapsedTime)
 		//Camera1->rotateDown(-2.0f, fElapsedTime);
 	}
 
-	if (GetKey(olc::Q).bHeld) // Increase FOV
+	if (GetKey(olc::Q).bHeld && fieldOfView + 20 * fElapsedTime < 180) // Increase FOV
 	{
-		fieldOfView += 20 * fElapsedTime; Camera1->setFieldOfView(fieldOfView);
+		fieldOfView += 20 * fElapsedTime;
+		Camera1->setFieldOfView(fieldOfView);
 	}
 
-	if (GetKey(olc::E).bHeld) // Decrease FOV
+	if (GetKey(olc::E).bHeld && fieldOfView - 20 * fElapsedTime > 0) // Decrease FOV
 	{
-		fieldOfView -= 20 * fElapsedTime; Camera1->setFieldOfView(fieldOfView);
-	}
-
-	
-	if (GetKey(olc::ENTER).bReleased) //Set Mouse Center
-	{
-		//physicsEngine.worldGravity *=  -1;
-		//SetMouseCenter(false);
-		physicsEngine->removeObjectByID(0);
+		fieldOfView -= 20 * fElapsedTime;
+		Camera1->setFieldOfView(fieldOfView);
 	}
 }

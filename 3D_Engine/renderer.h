@@ -113,8 +113,8 @@ bool Renderer::NormalizeTriangle(olc::mesh& meshObject, olc::mat4x4& matObject)
 			// Choose console colours as required (much easier with RGB)
 			// dp gives a nuber between 0 and 1
 			// we need to convert this number to RGB values (0 - 255);
-			triTransformed.colour = { (uint8_t)(dp * 255.0f), (uint8_t)(dp * 255.0f), (uint8_t)(dp * 255.0f) };
-
+			//triTransformed.colour = { (uint8_t)(dp * 255.0f), (uint8_t)(dp * 255.0f), (uint8_t)(dp * 255.0f) };
+			triTransformed.colour = olc::BLUE;
 
 			// Convert World Space --> View Space
 			triViewed.p[0] = Matrix_MultiplyVector(cameraPointer->matView, triTransformed.p[0]);

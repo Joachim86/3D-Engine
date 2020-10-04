@@ -199,6 +199,7 @@ public:
 
 	bool GameState_Prepare(float fElapsedTime)
 	{
+		
 		Object::objectVector.push_back(new Object(*Ball));
 
 		Plane->objectCoordinates = olc::vec3d{ 12.5, -1, 25 };
@@ -210,9 +211,7 @@ public:
 
 		Pong2->objectCoordinates = olc::vec3d{ 12.5, 0, 50 };
 		Object::objectVector.push_back(new Object(*Pong2));
-
-
-
+		
 
 
 		//Remember that the physics engine is only in 2d
@@ -221,9 +220,9 @@ public:
 
 		//Start physics engine
 		physicsEngine->Start();
-
+		
 		physicsEngine->addCircle(jph::jVector2D{ 12.5, 25 }, 0.5f, jph::jVector2D{ 0, -10 }, jph::jVector2D{ 0, 0 }, 1, 0, 1.01);
-
+		
 		// left player
 		//physicsEngine->addLine(jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x - 3, 0 }, jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x + 3, 0 }, 1);
 		physicsEngine->addCircle(jph::jVector2D{ Object::objectVector[2]->objectCoordinates.x, Object::objectVector[2]->objectCoordinates.z }, 3.0f, jph::jVector2D{ 0, 0 }, jph::jVector2D{ 0, 0 }, 2, 0, 1, true);
@@ -237,7 +236,7 @@ public:
 
 		physicsEngine->addLine(jph::jVector2D{ 0, 0 }, jph::jVector2D{ 0, 50 }, 0);		// Unten
 		physicsEngine->addLine(jph::jVector2D{ 25, 0 }, jph::jVector2D{ 25, 50 }, 0);	// Oben
-
+		
 		
 		SetMouseCenter(true);
 
@@ -266,7 +265,7 @@ public:
 		movement(fElapsedTime);
 		Camera1->rotateWithMouse(mouseX, mouseY, fElapsedTime);
 		
-
+		
 
 		if (GetKey(olc::UP).bHeld && physicsEngine->vecCircles[1].position.x < 22 - 5 * fElapsedTime)
 		{
@@ -278,7 +277,7 @@ public:
 			physicsEngine->vecCircles[1].position.x -= 5 * fElapsedTime;
 		}
 
-		/*
+		
 		if (GetKey(olc::RIGHT).bHeld)
 		{
 			physicsEngine->vecCircles[1].position.y += 5 * fElapsedTime;
@@ -288,19 +287,19 @@ public:
 		{
 			physicsEngine->vecCircles[1].position.y -= 5 * fElapsedTime;
 		}
-		*/
+		
 		
 		float offset = 0;
 		//pongAI1->update(fElapsedTime, physicsEngine->vecCircles[0].position.x, physicsEngine->vecCircles[0].position.y, physicsEngine->vecLines[1].start.x, physicsEngine->vecLines[1].end.x);
 		pongAI1->update(fElapsedTime, physicsEngine->vecCircles[0].position.x, physicsEngine->vecCircles[0].position.y, physicsEngine->vecCircles[2].position.x);
 
-
+		
 		// Update physics Engine
 		physicsEngine->update(fElapsedTime);
 		Object::objectVector[0]->setCoordinates(olc::vec3d{ physicsEngine->vecCircles[0].position.x, 0, physicsEngine->vecCircles[0].position.y });
 		Object::objectVector[2]->setCoordinates(olc::vec3d{ physicsEngine->vecCircles[1].position.x, Object::objectVector[2]->objectCoordinates.y, physicsEngine->vecCircles[1].position.y });
 		Object::objectVector[3]->setCoordinates(olc::vec3d{ physicsEngine->vecCircles[2].position.x, Object::objectVector[3]->objectCoordinates.y, physicsEngine->vecCircles[2].position.y });
-
+		
 		
 
 		// Game rules
@@ -324,7 +323,7 @@ public:
 			physicsEngine->vecCircles[0].velocity.x = 0;
 			physicsEngine->vecCircles[0].velocity.y = 10;
 		}
-
+		
 
 		// Clear the background
 		Clear(olc::BLACK);
@@ -342,7 +341,7 @@ public:
 
 		DrawString(0, ScreenHeight() - textScale * 8, playerText, olc::WHITE, textScale);
 		DrawString(ScreenWidth() - textScale * 8 * aiText.size(), ScreenHeight() - textScale * 8, aiText, olc::WHITE, textScale);
-
+		
 
 		return true;
 	}
@@ -367,7 +366,6 @@ int main()
 	if (demo.Construct(960, 540, 1, 1, true))
 		demo.Start();
 	
-
 	/*
 	ShowCursor(false);
 	if (demo.Construct(1920, 1080, 1, 1, true))
